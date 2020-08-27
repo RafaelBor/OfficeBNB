@@ -20,8 +20,12 @@ export class SearchPage implements OnInit {
     if (event.which == 13 || event.keyCode == 13) {
       //code to execute here
       this.navCtrl.navigateRoot('/calendar', {animated: true});
+    }
   }
-    
+   
+  buscar2()
+  {
+    this.navCtrl.navigateRoot('/calendar', {animated: true});
 
   }
 

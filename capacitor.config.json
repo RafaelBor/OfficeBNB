@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "io.officesApp.starter",
   "appName": "officesApp",
   "bundledWebRuntime": false,
   "npmClient": "npm",

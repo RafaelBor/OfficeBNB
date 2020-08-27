@@ -4,8 +4,19 @@
       <ion-back-button defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
 
-    <ion-input type="text" placeholder="¿En que ciudad estas buscando?" autocomplete="on" autofocus="true" (keypress)="buscar($event)"></ion-input>
+    <!-- <ion-input type="text" placeholder="¿En que ciudad estas buscando?" autocomplete="on"></ion-input> -->
 
+    <input list="browsers"  placeholder="¿En que ciudad estas buscando?" autofocus="true" (keypress)="buscar($event)">
+
+  <datalist id="browsers">
+      <option value="Hermosillo"></option>
+      <option value="Monterrey"></option>
+      <option value="Navojoa"></option>
+      <option value="Cd. Obregon"></option>
+      <option value="CDMX"></option>
+  </datalist>
+<ion-button (click)="buscar2()"> BUSCAR</ion-button>
+ 
   </ion-toolbar>
 </ion-header>
 

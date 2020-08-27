@@ -8,6 +8,9 @@ import { NavController, IonSlide, IonSlides } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  status = ""; 
+
   @ViewChild( 'slidePrincipal', {static: true} ) slides: IonSlides;
 
   constructor(
@@ -23,6 +26,9 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateRoot('/tabs/home', {animated: true});
   }
 
+  registro(form){
+    this.navCtrl.navigateRoot('/tabs/home', {animated: true});
+  }
 
   mostrarRegistro(){
     this.slides.lockSwipes( false );
