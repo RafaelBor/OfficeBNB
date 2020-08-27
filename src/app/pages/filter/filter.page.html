@@ -1,0 +1,68 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <button class="cerrar-modal" (click)="cerrarModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-title>Filtros Populares</ion-title>
+
+  <ion-list class="margin-top">
+    <ion-label class="ion-padding">Por nombre: </ion-label>
+    <ion-input class="ion-padding input-nombre" type="text" placeholder="Buscar por nombre"></ion-input>
+  </ion-list>
+
+  <ion-title class="margin-top">Servicios</ion-title>
+  <ion-list>
+    <ion-item>
+      <ion-label>Internet</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Aire Acondicionado</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Cafetera</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <a >Ver todos los servicios</a>
+    </ion-item>
+  </ion-list>
+
+  <ion-title class="margin-top">Rango de precios</ion-title>
+    <p class="precio">De MXM ${{this.minPrecio}} a MXM ${{this.maxPrecio}}</p>
+  <ion-item>
+    <ion-range (ionChange)="rangoPrecio($event)" step="100" dualKnobs="true" min="500" max="5000" color="secondary">
+      <ion-label slot="start">500$</ion-label>
+      <ion-label slot="end">5000$</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <ion-title class="margin-top">Tipo de oficina</ion-title>
+  <ion-item>
+    <ion-label>Compartida</ion-label>
+    <ion-checkbox></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Ejecutiva</ion-label>
+    <ion-checkbox></ion-checkbox>
+  </ion-item>
+
+ 
+</ion-content>
+
+<ion-footer color="white" style="background-color: white;">
+  <div class="footer">
+    <button class="btn-omitir">Omitir</button>
+
+    <button class="btn-aplicar">Aplicar Filtros</button>
+  </div>
+</ion-footer>

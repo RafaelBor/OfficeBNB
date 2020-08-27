@@ -1,0 +1,53 @@
+body{
+    background-color: white !important;
+}
+
+.cerrar-modal
+{
+    padding: 10px;
+    background-color: white !important ;
+    font-size: 25px;
+}
+
+a{
+    color: black;
+}
+
+.precio{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    color: rgb(133, 126, 126);
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+
+.input-nombre{
+    background-color: rgb(240, 235, 235);
+    border-radius: 10%;
+}
+
+
+.footer{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.btn-omitir{
+    background-color: white;
+    padding: 20px;
+    color: black;
+}
+
+.btn-aplicar{
+    background-color: black;
+    color: white;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 10%;
+
+}

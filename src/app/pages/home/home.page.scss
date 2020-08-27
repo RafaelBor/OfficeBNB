@@ -1,0 +1,41 @@
+
+
+.btn{
+    margin: 10px 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-buscar{
+    font-size: 18px;
+    max-width: 300px;
+    margin: 10px auto;
+    width: 100%;
+    display: block;
+    padding: 12px;
+    border-radius: 20px;
+    box-shadow: 0 1px 1px 0 rgba(126, 125, 125, 0.2), 0 6px 20px 0 rgba(121, 119, 119, 0.19);
+    background-color: white;
+}
+
+button ion-icon{
+    margin-right: 10px;
+    color: red;
+}
+
+.publicidad{
+    background-image: url("../../../assets/offices.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5%;
+    max-width: 300px;
+    min-height: 400px;
+    margin: 30px auto;
+}
+
+.contenido-publicidad{
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+

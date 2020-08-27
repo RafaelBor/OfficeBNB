@@ -1,0 +1,67 @@
+<ion-header></ion-header>
+<ion-content>
+  
+    <ion-slides pager="true">
+      <ion-slide>
+        <ion-img class="image" src="../../assets/oficina.jpg"></ion-img>
+      </ion-slide>
+    </ion-slides>
+
+    <button (click)="regresar()" class="button" slot="fixed">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+  
+    <div class="ion-padding">
+      <div class="border-bottom">
+        <h2 class="title">Oficina Completa / Hotel San Angel</h2>
+        <p class="lugar">Hermosillo, Sonora, Mexico</p>
+      </div>
+      <hr>
+      
+      <div class="office-description border-bottom">
+        <ion-text class="margin-bottom">Aqui va la descripcion fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</ion-text>
+        <hr>
+        <a class="margin-top margin-bottom">Mostrar Mas</a>
+      </div>
+      <hr>
+
+      <h3>Servicios</h3>
+
+      <ion-item>
+        <ion-label>Internet</ion-label>
+        <ion-icon name="wifi"></ion-icon>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Aire Acondicionado</ion-label>
+        <ion-icon name="thermometer"></ion-icon>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Cafetera</ion-label>
+        <ion-icon name="cafe"></ion-icon>
+      </ion-item>
+
+      
+      <ion-button fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los 8 servicios</ion-button>
+
+      <h3>Ubicacion</h3>
+      <p>Hermosillo, Sonora, Mexico</p>
+      <ion-img src="../../assets/maps.jpg"></ion-img>
+      
+    </div>
+
+    
+</ion-content>
+
+<ion-footer>
+  
+    <ion-toolbar>
+      <div class="footer">
+        <ion-label class="footer-precio"> <span class="precio"> 2,000$</span> por mes</ion-label>
+
+        <ion-button  shape="round" class="btn-reserva">Reservar</ion-button>
+      </div>
+  </ion-toolbar>
+  
+</ion-footer>

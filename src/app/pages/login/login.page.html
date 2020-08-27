@@ -1,0 +1,186 @@
+<ion-content class="fondo">
+
+
+  <ion-slides class="mainSlide" #slidePrincipal>
+    
+    <ion-slide>
+
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <ion-grid fixed>
+
+          <ion-row>
+            <ion-col>
+              <img src="/assets/logo.svg">
+            </ion-col>
+          </ion-row>
+        
+          <ion-row>
+            <ion-col>
+              
+                <ion-list>
+                  <ion-text color="primary">
+                    <h1>Encuentra la oficina de tus sueños</h1>
+                  </ion-text>
+                  <ion-item>
+                    <ion-label color="primary">Email</ion-label>
+                    <ion-input name="email"
+                                type="email"
+                                required
+                               ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label color="primary">Password</ion-label>
+                    <ion-input name="password"
+                                type="password"
+                                required
+                                 required></ion-input>
+                                
+                  </ion-item>
+                  <div *ngIf="status == 'error'">
+                    <ion-label class="error">Password o correo incorrectos</ion-label>
+                  </div>
+
+                </ion-list>
+            </ion-col>
+          </ion-row>
+          
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit"
+                          color="primary"
+                          shape="round"
+                          [disabled]="loginForm.invalid">
+                Login
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </form>
+    
+
+
+    </ion-slide>
+
+    <ion-slide>
+
+      
+      <ion-grid fixed>
+
+            <ion-row class="registro">
+              <img src="/assets/logo.svg" alt="">
+            <ion-col>
+                <h3>Registrate Aqui</h3>
+            </ion-col>
+            </ion-row>
+
+            <div class="registrado-correcto" *ngIf="status == 'success'">
+              El usuario se a registrado correctamente 
+          </div>
+      
+          <div class="error"  *ngIf="status == 'error'">
+              El usuario no se a registrado correctamente
+          </div>
+        
+            <form (ngSubmit)="registro( fRegistro )" #fRegistro="ngForm">
+                <ion-row>
+                    <ion-col>
+                        
+                        <ion-list>
+                            
+                            <ion-item>
+                            <ion-label color="primary">Email</ion-label>
+                            <ion-input name="email" 
+                                        type="email"
+                                       
+                                        required></ion-input>
+                            </ion-item>
+
+                            <ion-item>
+                            <ion-label color="primary">Nombre</ion-label>
+                            <ion-input name="nombre"
+                                        type="text"
+                                        
+                                        required></ion-input>
+                            </ion-item>
+
+                            <ion-item>
+                              <ion-label color="primary">Apellido</ion-label>
+                              <ion-input name="apellido"
+                                          type="text"
+                                          
+                                          required></ion-input>
+                              </ion-item>
+
+                            <ion-item>
+                            <ion-label color="primary">Password</ion-label>
+                            <ion-input name="password"
+                                        type="password"
+                                        
+                                        required></ion-input>
+                            </ion-item>
+
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                <ion-col>
+                    <ion-button type="submit"
+                                color="primary"
+                                shape="round"
+                                [disabled]="fRegistro.invalid">
+                        Crear usuario
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+            
+            </form>
+        </ion-grid>
+  
+  
+      </ion-slide>
+
+
+  </ion-slides>
+
+
+
+</ion-content>
+
+
+<ion-footer no-border>
+  <ion-toolbar>
+    
+    <ion-row>
+
+      <ion-col>
+          <ion-button shape="round"
+                      expand="full"
+                      size="small"
+                      fill="outline"
+                      color="primary"
+                      (click)="mostrarRegistro()">
+            Ingresar
+          </ion-button>
+      </ion-col>
+
+      <ion-col>
+        <ion-button shape="round"
+                    expand="full"
+                    size="small"
+                    fill="outline"
+                    color="primary"
+                    (click)="mostrarLogin()">
+          Registrarme
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+
+
+  </ion-toolbar>
+</ion-footer>

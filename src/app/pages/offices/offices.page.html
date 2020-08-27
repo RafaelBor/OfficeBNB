@@ -1,0 +1,76 @@
+<ion-header *ngIf="scroll > 150">
+  <ion-toolbar>
+    <div class="header-oficinas">
+      <div class="header-title">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+        </ion-buttons>
+        <ion-label class="title-country">Hermosillo</ion-label>
+      </div>
+
+      <div>
+        <button class="calendario" (click)="calendar()">Fechas</button>
+        <button class="filtro" (click)="filter()">
+          <ion-icon class="icon-options margin-right" name="options"></ion-icon>
+        </button>
+      </div>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <div class="contenedor-mapa">
+    <div id='map'></div>
+      
+    <div class="buscador" *ngIf="scroll <= 150 || scrollAct == 1" slot="fixed">
+      <a [routerLink]="['/tabs/home']" class="link">
+        <ion-icon name="arrow-back"></ion-icon>
+      </a>
+
+      <ion-label class="title-country">Hermosillo</ion-label>
+
+        <button class="calendario" (click)="calendar()">Fechas</button>
+
+      <button class="filtro" (click)="filter()" >
+        <ion-icon class="icon-options" name="options"></ion-icon>
+      </button>
+      
+    </div>
+    
+
+  </div>
+      
+  
+
+  <div class="ion-padding">
+    <div class="numero-oficinas"> 
+
+      <ion-label>2 oficinas encontradas</ion-label>
+
+    </div>
+
+    <div class="contenido-oficinas">
+      <ion-card type="button" (click)="mostrarOficina()">
+        <ion-slides pager="true">
+          <ion-slide>
+            <ion-img src="../../assets/oficina.jpg"></ion-img>
+          </ion-slide>
+        </ion-slides>
+        
+        <ion-card-header>Oficina Completa - Hermosillo</ion-card-header>
+        <ion-card-content><span class="precio">2.000$</span> por mes</ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-slides pager="true">
+          <ion-slide>
+            <ion-img src="../../assets/oficina.jpg"></ion-img>
+          </ion-slide>
+        </ion-slides>
+        
+        <ion-card-header>Oficina Completa - Hermosillo</ion-card-header>
+        <ion-card-content><span class="precio">2.000$</span> por mes</ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

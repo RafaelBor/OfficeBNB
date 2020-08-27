@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/calendar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Selecciona la fecha y horas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label>Selecciona el dia</ion-label>
+    <ion-datetime displayFormat="DD MMM YYYY" placeholder="¿Que dia rentaras?"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Hora de inicio</ion-label>
+    <ion-datetime displayFormat="HH" placeholder="¿A que horas llegaras?"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Hora final</ion-label>
+    <ion-datetime displayFormat="HH" placeholder="¿A que horas te iras?"></ion-datetime>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="buscar()" expand="full">Buscar</ion-button>
+  </ion-toolbar>
+</ion-footer>

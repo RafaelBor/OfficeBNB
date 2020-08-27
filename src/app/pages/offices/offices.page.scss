@@ -1,0 +1,130 @@
+#map{
+    width: 100%;
+    height: 300px;
+    background-color: rgb(88, 84, 84);
+    
+}
+
+.margin-right{
+    margin-right: 20px;
+}
+
+.calendario{
+    padding: 10px;
+    background-color: white;
+}
+
+.title-country{
+    font-weight: bold;
+}
+
+.header-oficinas{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title{
+    display: flex;
+    align-items: center;
+
+}
+
+.numero-oficinas{
+    display: flex;
+    margin: 15px;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    
+
+    
+}
+
+.numero-oficinas ion-label{
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.precio{
+    font-weight: bold;
+}
+
+ion-card{
+    border-radius: 10px !important;
+    margin-bottom: 30px !important;
+}
+
+
+.buscador{
+    display: flex;
+    
+    
+   justify-content: center;
+    background-color: white;
+    border-radius: 15%;
+    border: none;
+    padding: 15px;
+    align-items: center;
+
+    position: absolute;
+    top: 20px;
+    left: 50px;
+}
+
+
+
+.buscador ion-icon{
+    margin-right: 5px;
+}
+
+.buscador ion-label{
+    margin-right: 30px;
+}
+
+
+
+ .filtro{
+    border-left: 1px solid black;
+    background-color: white;
+}
+
+.icon-options{
+    margin-left: 5px;
+    color: black;
+}
+
+
+.prueba{
+    
+    display: flex;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    background-color: black;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    left: 150px;
+    
+
+}
+
+.prueba2{
+    display: flex;
+    justify-content: center;
+   
+    
+}
+
+
+.contenedor-mapa{
+    position: relative;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}

@@ -1,0 +1,22 @@
+.barra-footer{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.btn-siguiente{
+    padding: 15px 25px;
+    background-color: rgb(167, 158, 158);
+    border-radius: 5%;
+    color: white;
+}
+
+.btn-omitir{
+    color: black;
+    background-color: white;
+    padding: 0px !important;
+    text-decoration: underline;
+    font-weight: bold;
+    margin: 0px;
+
+}
