@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NavController} from '@ionic/angular';
 
 @Component({
@@ -15,8 +15,16 @@ export class AccountPage implements OnInit {
   ngOnInit() {
   }
 
+  userEdit()
+  {
+    this.navCtrl.navigateRoot('/user-edit', {animated: true});
+  }
+
   logout(){
     this.navCtrl.navigateRoot('/login', {animated: true});
   }
+
+
+
 
 }

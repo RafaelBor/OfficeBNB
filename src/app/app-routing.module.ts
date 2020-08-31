@@ -46,7 +46,28 @@ const routes: Routes = [
   {
     path: 'select-hours',
     loadChildren: () => import('./pages/select-hours/select-hours.module').then( m => m.SelectHoursPageModule)
-  }
+  },
+  {
+    path: 'messages',
+    loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
+  },
+  {
+    path: 'rules-office',
+    loadChildren: () => import('./pages/rules-office/rules-office.module').then( m => m.RulesOfficePageModule)
+  },
+  {
+    path: 'office-pay',
+    loadChildren: () => import('./pages/office-pay/office-pay.module').then( m => m.OfficePayPageModule)
+  },
+  {
+    path: 'user-edit',
+    loadChildren: () => import('./pages/user-edit/user-edit.module').then( m => m.UserEditPageModule)
+  },
+  {
+    path: 'offices-save',
+    loadChildren: () => import('./pages/offices-save/offices-save.module').then( m => m.OfficesSavePageModule)
+  },
+ 
 ];
 
 @NgModule({

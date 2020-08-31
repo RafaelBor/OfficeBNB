@@ -8,12 +8,22 @@ import { OfficePageRoutingModule } from './office-routing.module';
 
 import { OfficePage } from './office.page';
 
+import {OfficeServicesPage } from '../office-services/office-services.page'
+import {OfficeServicesPageModule} from '../office-services/office-services.module'
+
+
+
 @NgModule({
+  entryComponents: [
+    OfficeServicesPage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OfficePageRoutingModule
+    OfficePageRoutingModule,
+    OfficeServicesPageModule
+    
   ],
   declarations: [OfficePage]
 })

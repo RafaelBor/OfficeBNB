@@ -17,6 +17,7 @@ declare var mapboxgl:any;
 export class OfficesPage implements OnInit, AfterViewInit {
   public scroll: any
   public scrollAct: number = 1
+  imagenes = ['oficina.jpg', 'oficina_2.jpg'];
 
   
 
@@ -62,6 +63,7 @@ export class OfficesPage implements OnInit, AfterViewInit {
 
 
   //Abrir modal de calendario
+  
   async openCalendar() {
     const options: CalendarModalOptions = {
       pickMode: 'range',
@@ -79,18 +81,28 @@ export class OfficesPage implements OnInit, AfterViewInit {
     presentingElement: await this.modalCtrl.getTop()
   });
 
+  console.log("asfasf");
   myCalendar.present();
 
- // myCalendar.onDidDismiss((date: { from: CalendarResult; to: CalendarResult }, type: string) => {
-   // console.log(date);
-  //});
+  const event : any = await myCalendar.onDidDismiss();
+  const {data: date, role} = event;
+
+  if (role === 'done') {
+    this.dateRange = Object.assign({}, {
+      from: date.from.dateObj,
+      to: date.to.dateObj
+    });
+  }
+  console.log(date);
+  console.log('role', role);
+
 
 }
 
   //Mapa
   ngAfterViewInit()
   {
-    mapboxgl.accessToken = 'pk.eyJ1IjoicmFmYWVsYm9yIiwiYSI6ImNrZTYzY2dhbDE4eWwzMHN6Y2pxeHRwMGkifQ.8WPNmFO5tD1BDMpbCnMPgQ';
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmFmYWVsYm9yIiwiYSI6ImNrZTYzand1NDE5Y20ycXB1am9mbjFuOTgifQ.RHArcX_yJnsWGVjYawixxg';
       const map = new mapboxgl.Map({
       container: 'map',
       center: [-110.97732, 29.1026],

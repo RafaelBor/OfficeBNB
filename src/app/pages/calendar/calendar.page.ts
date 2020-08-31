@@ -54,7 +54,7 @@ export class CalendarPage implements OnInit {
       color:'primary',
       weekdays: ['Lun','Mar','Mie','Jue','Vie','Sab','Dom'],
       doneLabel: "buscar",
-      closeLabel: ""
+      closeLabel: "Cancelar"
       
       
     };
@@ -67,13 +67,21 @@ export class CalendarPage implements OnInit {
 
   myCalendar.present();
 
-  console.log(event);
+ 
 
-  myCalendar.onDidDismiss()
-  {
+
+  const event : any = await myCalendar.onDidDismiss();
+  const {data: date, role} = event;
+
+  if (role === 'done') {
+    this.dateRange = Object.assign({}, {
+      from: date.from.dateObj,
+      to: date.to.dateObj
+    });
     this.navCtrl.navigateRoot('/tabs/offices', {animated: true});
-      
   }
+  console.log(date);
+  console.log('role', role);
 
   
 }

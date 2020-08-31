@@ -50,10 +50,10 @@
     </div>
 
     <div class="contenido-oficinas">
-      <ion-card type="button" (click)="mostrarOficina()">
+      <ion-card type="button" [routerLink]="['/office']"  >
         <ion-slides pager="true">
-          <ion-slide>
-            <ion-img src="../../assets/oficina.jpg"></ion-img>
+          <ion-slide *ngFor="let image of imagenes">
+            <ion-img src="../../assets/{{image}}"></ion-img>
           </ion-slide>
         </ion-slides>
         

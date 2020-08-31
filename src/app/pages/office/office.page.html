@@ -2,10 +2,11 @@
 <ion-content>
   
     <ion-slides pager="true">
-      <ion-slide>
-        <ion-img class="image" src="../../assets/oficina.jpg"></ion-img>
+      <ion-slide *ngFor="let image of imagenes">
+        <ion-img class="image" src="../../assets/{{image}}"></ion-img>
       </ion-slide>
     </ion-slides>
+    
 
     <button (click)="regresar()" class="button" slot="fixed">
       <ion-icon name="arrow-back" ></ion-icon>
@@ -13,15 +14,19 @@
   
     <div class="ion-padding">
       <div class="border-bottom">
-        <h2 class="title">Oficina Completa / Hotel San Angel</h2>
+        <div class="contenedor-guardar">
+          <h2 class="title">Oficina Completa / Hotel San Angel</h2>
+          <ion-icon (click)="guardarOffice()" class="icon-guardar" name="{{guardar}}"></ion-icon>
+          
+        </div>
         <p class="lugar">Hermosillo, Sonora, Mexico</p>
       </div>
       <hr>
       
       <div class="office-description border-bottom">
-        <ion-text class="margin-bottom">Aqui va la descripcion fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</ion-text>
+        <ion-label class="margin-bottom"> {{ texto | slice: 0: oculto}}...</ion-label>
         <hr>
-        <a class="margin-top margin-bottom">Mostrar Mas</a>
+        <ion-label color="primary" (click)="oculto = 5000" *ngIf="oculto !== 5000">Mostrar mas</ion-label>
       </div>
       <hr>
 
@@ -43,7 +48,7 @@
       </ion-item>
 
       
-      <ion-button fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los 8 servicios</ion-button>
+      <ion-button (click)="servicios()" fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los 8 servicios</ion-button>
 
       <h3>Ubicacion</h3>
       <p>Hermosillo, Sonora, Mexico</p>
@@ -51,6 +56,7 @@
       
     </div>
 
+    
     
 </ion-content>
 
@@ -60,7 +66,7 @@
       <div class="footer">
         <ion-label class="footer-precio"> <span class="precio"> 2,000$</span> por mes</ion-label>
 
-        <ion-button  shape="round" class="btn-reserva">Reservar</ion-button>
+        <ion-button shape="round" class="btn-reserva" type="button" [routerLink]="['/rules-office']">Reservar</ion-button>
       </div>
   </ion-toolbar>
   

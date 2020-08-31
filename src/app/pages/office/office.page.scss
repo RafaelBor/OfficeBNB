@@ -25,6 +25,15 @@ button{
     font-size: 20px;
 }
 
+.contenedor-guardar{
+    display: flex;
+    align-items: center;
+}
+
+.icon-guardar{
+    font-size: 30px;
+    padding: 10px;
+}
 .lugar{
     color: rgb(121, 116, 116);
     font-size: 14px;

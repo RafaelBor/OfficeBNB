@@ -6,7 +6,7 @@
 
     <!-- <ion-input type="text" placeholder="¿En que ciudad estas buscando?" autocomplete="on"></ion-input> -->
 
-    <input list="browsers"  placeholder="¿En que ciudad estas buscando?" autofocus="true" (keypress)="buscar($event)">
+  <input list="browsers"  placeholder="¿En que ciudad estas buscando?" autofocus="true" (keypress)="buscar($event)">
 
   <datalist id="browsers">
       <option value="Hermosillo"></option>
@@ -15,7 +15,9 @@
       <option value="Cd. Obregon"></option>
       <option value="CDMX"></option>
   </datalist>
-<ion-button (click)="buscar2()"> BUSCAR</ion-button>
+
+  <ion-icon class="btn-buscar" slot="end" (click)="buscar2()" name="search"></ion-icon>
+
  
   </ion-toolbar>
 </ion-header>

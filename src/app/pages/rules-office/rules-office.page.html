@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/office"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="title">Revisa las reglas de la oficina</h2>
+
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img src="../../assets/no-fumar.svg">
+    </ion-thumbnail>
+    <ion-label>No fumar</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img src="../../assets/no-animales.svg">
+    </ion-thumbnail>
+    <ion-label>No Mascotas</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-thumbnail slot="start">
+      <img src="../../assets/no-fiestas.svg">
+    </ion-thumbnail>
+    <ion-label>No eventos o fiestas</ion-label>
+  </ion-item>
+
+ 
+</ion-content>
+
+<ion-footer>
+  
+  <ion-toolbar>
+    <div class="footer">
+      <ion-label class="footer-precio"> <span class="precio"> 2,000$</span> por mes</ion-label>
+
+      <ion-button shape="round" class="btn-reserva" type="button" [routerLink]="['/office-pay']">De acuerdo</ion-button>
+    </div>
+</ion-toolbar>
+
+</ion-footer>

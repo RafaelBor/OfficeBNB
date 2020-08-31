@@ -1,0 +1,61 @@
+.header-office{
+    display: flex;
+    
+}
+
+.informacion-oficina{
+    flex-basis: calc(70% - 1rem);
+    width: 100%;
+}
+
+.imagen-oficina{
+   width: 200px;
+   
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.date
+{
+    color: rgb(141, 137, 137);
+}
+
+.contenido-precios{
+    margin-top: 20px;
+}
+
+.precios{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.border-bottom{
+    border-bottom: 1px solid gray;
+}
+
+.section{
+    border-bottom: 4px solid rgb(228, 224, 224);
+    padding: 10px;
+}
+
+.img-pago{
+    max-width: 20px;
+}
+
+.metodo-pago{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.texto-politicas
+{
+    text-align: center;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 12px;
+}

@@ -19,6 +19,16 @@ const routes: Routes = [
         import('../account/account.module').then(m => m.AccountPageModule)
       },
       {
+        path: 'messages',
+        loadChildren: () =>
+        import('../messages/messages.module').then(m => m.MessagesPageModule)
+      },
+      {
+        path: 'offices-save',
+        loadChildren: () =>
+        import('../offices-save/offices-save.module').then(m => m.OfficesSavePageModule)
+      },
+      {
         path: 'offices',
         loadChildren: () =>
         import('../offices/offices.module').then(m => m.OfficesPageModule)

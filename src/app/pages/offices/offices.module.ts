@@ -13,6 +13,7 @@ import { FilterPage } from '../filter/filter.page';
 import { FilterPageModule } from '../filter/filter.module';
 
 
+
 @NgModule({
 entryComponents: [
   FilterPage
@@ -23,8 +24,8 @@ entryComponents: [
     IonicModule,
     OfficesPageRoutingModule,
     FilterPageModule,
-
     CalendarModule
+    
   ],
   declarations: [OfficesPage]
 })
