@@ -67,6 +67,18 @@ const routes: Routes = [
     path: 'offices-save',
     loadChildren: () => import('./pages/offices-save/offices-save.module').then( m => m.OfficesSavePageModule)
   },
+  {
+    path: 'credit-card-details',
+    loadChildren: () => import('./pages/credit-card-details/credit-card-details.module').then( m => m.CreditCardDetailsPageModule)
+  },
+  {
+    path: 'office-complete',
+    loadChildren: () => import('./pages/office-complete/office-complete.module').then( m => m.OfficeCompletePageModule)
+  },
+  {
+    path: 'office-historial',
+    loadChildren: () => import('./pages/office-historial/office-historial.module').then( m => m.OfficeHistorialPageModule)
+  },
  
 ];
 

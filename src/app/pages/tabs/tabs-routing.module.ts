@@ -29,6 +29,11 @@ const routes: Routes = [
         import('../offices-save/offices-save.module').then(m => m.OfficesSavePageModule)
       },
       {
+        path: 'historial',
+        loadChildren: () =>
+        import('../office-historial/office-historial.module').then(m => m.OfficeHistorialPageModule)
+      },
+      {
         path: 'offices',
         loadChildren: () =>
         import('../offices/offices.module').then(m => m.OfficesPageModule)

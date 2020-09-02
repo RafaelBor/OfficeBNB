@@ -1,0 +1,32 @@
+.content-info{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    
+}
+
+.img{
+    max-width: 50px;
+}
+
+.informacion{
+    text-align: center;
+    font-size: 19px;
+}
+
+.informacion-title{
+    font-weight: bold;
+}
+
+
+.header{
+    --background: rgb(32, 127, 235);
+}
+
+.cerrar{
+    padding: 10px;
+    background-color: rgb(32, 127, 235);
+    font-size: 25px;
+}

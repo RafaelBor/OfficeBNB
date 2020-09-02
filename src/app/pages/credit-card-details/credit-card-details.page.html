@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/office-pay"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nombre de la targeta</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Numero de la targeta</ion-label>
+    <ion-input type="number" ></ion-input>
+  </ion-item>
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">MM</ion-label>
+        <ion-datetime displayFormat="MM"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">AAAA</ion-label>
+        <ion-datetime displayFormat="YYYY" yearValues="2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027"></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-item>
+  <ion-label position="floating">CVC</ion-label>
+  <ion-input max="4" type="number" ></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="bold">Total a pagar: </ion-label>
+  <ion-label class="bold">$2,360</ion-label>
+</ion-item>
+</ion-content>
+
+<ion-footer class="footer">
+  <ion-button expand="full" [routerLink]="['/office-complete']">PAGAR AHORA</ion-button>
+</ion-footer>

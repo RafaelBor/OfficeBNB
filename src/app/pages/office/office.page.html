@@ -6,19 +6,33 @@
         <ion-img class="image" src="../../assets/{{image}}"></ion-img>
       </ion-slide>
     </ion-slides>
-    
-
+    <!--
     <button (click)="regresar()" class="button" slot="fixed">
       <ion-icon name="arrow-back" ></ion-icon>
     </button>
+    -->
+  
   
     <div class="ion-padding">
       <div class="border-bottom">
+        <ion-toolbar class="">
+          <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+          </ion-buttons>
+          <div class="contenedor-guardar">
+            <h2 class="title">Oficina Completa / Hotel San Angel</h2>
+            <ion-icon (click)="guardarOffice()" class="icon-guardar" name="{{guardar}}"></ion-icon>
+            
+          </div>
+        </ion-toolbar>
+        
+        <!--
         <div class="contenedor-guardar">
           <h2 class="title">Oficina Completa / Hotel San Angel</h2>
           <ion-icon (click)="guardarOffice()" class="icon-guardar" name="{{guardar}}"></ion-icon>
           
         </div>
+        -->
         <p class="lugar">Hermosillo, Sonora, Mexico</p>
       </div>
       <hr>

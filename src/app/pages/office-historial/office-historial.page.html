@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Historial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item type="button" [routerLink]="['/office']">
+        <ion-img class="image" src="../../assets/oficina.jpg"></ion-img>
+        <div class="contenido-office">
+          <p class="bold">Renta de oficina en hotel san angel</p>
+          <div class="contenido-text">
+            <ion-badge color="success">Vigente</ion-badge>
+            <p class="gray">01 sep a 01 oct</p>
+          </div>
+        </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-img class="image" src="../../assets/oficina_2.jpg"></ion-img>
+      <div class="contenido-office">
+        <p class="bold">Renta de oficina en hotel del mayo</p>
+        <div class="contenido-text">
+          <ion-badge color="danger">Vencido</ion-badge>
+          <p class="gray">01 ago a 01 sep</p>
+        </div>
+      </div>
+  </ion-item>
+  </ion-list>
+</ion-content>

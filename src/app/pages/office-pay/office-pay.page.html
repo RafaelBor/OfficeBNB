@@ -25,13 +25,13 @@
       </div>
   
       <div class="precios border-bottom">
-        <ion-label>Comicion por servicio</ion-label>
-        <ion-label>$200</ion-label>
+        <ion-label>Comisión por servicio</ion-label>
+        <ion-label>$360</ion-label>
       </div>
   
       <div class="precios">
         <ion-label>Total(MXM)</ion-label>
-        <ion-label>$2,200</ion-label>
+        <ion-label>$2,360</ion-label>
       </div>
     </div>
   </div>
@@ -46,5 +46,5 @@
   <ion-text >Acepto las reglas acordadas de la oficina, como tambien pagar el importe total indicado, que inclute las comisiones por el servicio.</ion-text>
   </div>
 
-  <ion-button expand="full">Confirma y paga</ion-button>
+  <ion-button expand="full" [routerLink]="['/credit-card-details']">Confirma y paga</ion-button>
 </ion-content>
