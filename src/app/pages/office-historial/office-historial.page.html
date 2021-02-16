@@ -4,29 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="reservas">
 
   <ion-list>
-    <ion-item type="button" [routerLink]="['/office']">
-        <ion-img class="image" src="../../assets/oficina.jpg"></ion-img>
+    <ion-item *ngFor="let reserva of reservas" type="button" (click)="MostrarStatus(reserva.id)">
+        <ion-img *ngIf="reserva.oficina.imagenes[0]" class="image" src="{{url + 'oficina/image/' + reserva.oficina.imagenes[0].nombre_imagen}}"></ion-img>
         <div class="contenido-office">
-          <p class="bold">Renta de oficina en hotel san angel</p>
+          <p class="bold">Renta de oficina en {{reserva.oficina.establecimiento}}</p>
           <div class="contenido-text">
-            <ion-badge color="success">Vigente</ion-badge>
-            <p class="gray">01 sep a 01 oct</p>
+            <ion-badge color="primary">Rentada</ion-badge>
+            <p *ngIf="reserva.fechaInicio != null" class="gray">{{reserva.fechaInicio | date: 'mediumDate'}} a {{reserva.fechaFinal | date: 'mediumDate'}}</p>
+            <p *ngIf="reserva.diaReserva != null" class="gray">{{reserva.diaReserva | date: 'mediumDate'}} de {{reserva.horaInicio | date: 'HH'}}:00 a {{reserva.horaFinal | date: 'HH'}}:00</p>
           </div>
         </div>
     </ion-item>
 
-    <ion-item>
-      <ion-img class="image" src="../../assets/oficina_2.jpg"></ion-img>
-      <div class="contenido-office">
-        <p class="bold">Renta de oficina en hotel del mayo</p>
-        <div class="contenido-text">
-          <ion-badge color="danger">Vencido</ion-badge>
-          <p class="gray">01 ago a 01 sep</p>
-        </div>
-      </div>
-  </ion-item>
   </ion-list>
 </ion-content>

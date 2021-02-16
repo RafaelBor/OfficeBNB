@@ -5,3 +5,41 @@ img{
 .registro{
     display: inline;
 }
+
+.error{
+    color: red;
+    font-size: 15px;
+}
+
+.registrado-correcto{
+    color: green;
+    font-size: 20px;
+}
+
+
+.logo-texto
+{
+    background-color: blue;
+    position: relative;
+    
+}
+
+.logo-texto h1
+{
+    color: white;
+}
+
+.wave
+{
+   
+    min-width: 100%;
+}
+
+
+ion-grid{
+    padding: 0px !important;
+}
+
+.formulario-login{
+    padding: 5px;
+}

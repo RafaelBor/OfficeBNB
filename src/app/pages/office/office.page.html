@@ -1,11 +1,20 @@
-<ion-header></ion-header>
-<ion-content>
+
+
+
+
+
+<ion-content  >
   
+  <div class="contenedor-imagen" *ngIf="oficina">
     <ion-slides pager="true">
-      <ion-slide *ngFor="let image of imagenes">
-        <ion-img class="image" src="../../assets/{{image}}"></ion-img>
+      <ion-slide *ngFor="let image of oficina.imagenes">
+        <ion-img class="image" src="{{url + 'oficina/image/' + image.nombre_imagen}}"></ion-img>
       </ion-slide>
     </ion-slides>
+  </div>
+
+ 
+   
     <!--
     <button (click)="regresar()" class="button" slot="fixed">
       <ion-icon name="arrow-back" ></ion-icon>
@@ -14,59 +23,52 @@
   
   
     <div class="ion-padding">
+      <div *ngIf="oficina">
+        
       <div class="border-bottom">
         <ion-toolbar class="">
           <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/home"></ion-back-button>
           </ion-buttons>
           <div class="contenedor-guardar">
-            <h2 class="title">Oficina Completa / Hotel San Angel</h2>
-            <ion-icon (click)="guardarOffice()" class="icon-guardar" name="{{guardar}}"></ion-icon>
+            
+            <h2 class="title">{{oficina.nombre}} <span *ngIf="oficina.establecimiento">/ {{oficina.establecimiento}}</span></h2>
+            
+            <ion-icon *ngIf="existe == true" (click)="guardarOffice()" class="icon-guardar" name="heart-outline"></ion-icon>
+
+            <ion-icon *ngIf="existe == false" (click)="EliminarOficinaGuardada()" class="icon-guardar" name="heart"></ion-icon>
+           
             
           </div>
         </ion-toolbar>
         
-        <!--
-        <div class="contenedor-guardar">
-          <h2 class="title">Oficina Completa / Hotel San Angel</h2>
-          <ion-icon (click)="guardarOffice()" class="icon-guardar" name="{{guardar}}"></ion-icon>
-          
-        </div>
-        -->
-        <p class="lugar">Hermosillo, Sonora, Mexico</p>
+        <p class="lugar">{{oficina.ciudad}}, {{oficina.estado}}, {{oficina.pais}}</p>
       </div>
       <hr>
       
       <div class="office-description border-bottom">
-        <ion-label class="margin-bottom"> {{ texto | slice: 0: oculto}}...</ion-label>
+        <ion-label class="margin-bottom"> {{ oficina.descripcion | slice: 0: oculto}}...</ion-label>
         <hr>
         <ion-label color="primary" (click)="oculto = 5000" *ngIf="oculto !== 5000">Mostrar mas</ion-label>
+        <ion-label color="primary" (click)="oculto = 150" *ngIf="oculto == 5000">Mostrar menos</ion-label>
+        
       </div>
       <hr>
 
       <h3>Servicios</h3>
 
-      <ion-item>
-        <ion-label>Internet</ion-label>
-        <ion-icon name="wifi"></ion-icon>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Aire Acondicionado</ion-label>
-        <ion-icon name="thermometer"></ion-icon>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label>Cafetera</ion-label>
-        <ion-icon name="cafe"></ion-icon>
-      </ion-item>
-
-      
-      <ion-button (click)="servicios()" fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los 8 servicios</ion-button>
-
+      <div *ngFor="let servicio of servicios let i = index">
+        <ion-item *ngIf="i < 2" >
+          <ion-label >{{servicio.nombreServicio}}</ion-label>
+          <ion-icon  name="wifi"></ion-icon>
+        </ion-item>
+      </div>
+   
+    <ion-button (click)="MostrarServicios()" fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los {{numeroServicios}} servicios</ion-button>
+    </div>
       <h3>Ubicacion</h3>
       <p>Hermosillo, Sonora, Mexico</p>
-      <ion-img src="../../assets/maps.jpg"></ion-img>
+      <div id='map2'></div>
       
     </div>
 
@@ -77,10 +79,13 @@
 <ion-footer>
   
     <ion-toolbar>
-      <div class="footer">
-        <ion-label class="footer-precio"> <span class="precio"> 2,000$</span> por mes</ion-label>
+      <div class="footer" *ngIf="oficina">
+        <ion-label *ngIf="this.dias" class="footer-precio"> <span class="precio"> {{oficina.precio_dia}}$</span> por dia</ion-label>
 
-        <ion-button shape="round" class="btn-reserva" type="button" [routerLink]="['/rules-office']">Reservar</ion-button>
+        <ion-label *ngIf="this.horas" class="footer-precio"> <span class="precio"> {{oficina.precio_hora}}$</span> por hora</ion-label>
+
+        <ion-button *ngIf="statusReserva == 'disponible'" shape="round" class="btn-reserva" type="button" [routerLink]="['/rules-office', oficina.id]">Reservar</ion-button>
+        <p *ngIf="statusReserva == 'ocupada'">Oficina ocupada</p>
       </div>
   </ion-toolbar>
   

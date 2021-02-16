@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/filter/filter.module').then( m => m.FilterPageModule)
   },
   {
-    path: 'office',
+    path: 'office/:id',
     loadChildren: () => import('./pages/office/office.module').then( m => m.OfficePageModule)
   },
   {
@@ -52,11 +52,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   },
   {
-    path: 'rules-office',
+    path: 'rules-office/:id',
     loadChildren: () => import('./pages/rules-office/rules-office.module').then( m => m.RulesOfficePageModule)
   },
   {
-    path: 'office-pay',
+    path: 'office-pay/:id',
     loadChildren: () => import('./pages/office-pay/office-pay.module').then( m => m.OfficePayPageModule)
   },
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/offices-save/offices-save.module').then( m => m.OfficesSavePageModule)
   },
   {
-    path: 'credit-card-details',
+    path: 'credit-card-details/:id',
     loadChildren: () => import('./pages/credit-card-details/credit-card-details.module').then( m => m.CreditCardDetailsPageModule)
   },
   {
@@ -78,6 +78,14 @@ const routes: Routes = [
   {
     path: 'office-historial',
     loadChildren: () => import('./pages/office-historial/office-historial.module').then( m => m.OfficeHistorialPageModule)
+  },
+  {
+    path: 'status-reserva',
+    loadChildren: () => import('./pages/status-reserva/status-reserva.module').then( m => m.StatusReservaPageModule)
+  },
+  {
+    path: 'buscar-cupon',
+    loadChildren: () => import('./pages/buscar-cupon/buscar-cupon.module').then( m => m.BuscarCuponPageModule)
   },
  
 ];

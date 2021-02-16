@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar >
+    <div class="header-servicios" *ngIf="reserva">
+      <button class="cerrar-modal" (click)="cerrarModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+
+      <ion-title>{{reserva.oficina.nombre}}</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="reserva">
+
+  <div class="contenido-status" *ngIf="disponible">
+    <h3 *ngIf="reserva.fechaInicio != null">Tu oficina esta disponible para ti en estos momentos, su estancia se termina el {{reserva.fechaFinal}}</h3>
+    <h3 *ngIf="reserva.diaReserva != null">Tu oficina esta disponible para ti este dia, de {{reserva.horaInicio | date: 'HH'}}:00 a {{reserva.horaFinal | date: 'HH'}}:00</h3>
+    <ion-item color="success">
+      <ion-label class="status">
+        Disponible
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <div class="contenido-status" *ngIf="espera">
+    <h3 *ngIf="reserva.fechaInicio != null">Tu estancia en la oficina empieza el dia: {{reserva.fechaInicio}}, Te esperamos con ansias.</h3>
+
+    <h3 *ngIf="reserva.diaReserva != null">Tu estancia en la oficina empieza el dia: {{reserva.diaReserva}}, de {{reserva.horaInicio | date: 'HH'}}:00 a {{reserva.horaFinal | date: 'HH'}}:00 Te esperamos con ansias.</h3>
+    
+    <ion-item color="primary">
+      <ion-label class="status">
+        En espera
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+  <div class="contenido-status" *ngIf="finalizada">
+    <h3 *ngIf="reserva.fechaInicio != null">Tu estancia en la oficina a finalizado desde el dia: {{reserva.fechaFinal}}, esperemos vuelva pronto.</h3>
+    <h3 *ngIf="reserva.diaReserva != null">Tu estancia en la oficina a finalizado desde el dia: {{reserva.diaReserva}}, esperemos vuelva pronto.</h3>
+
+    <ion-item color="danger">
+      <ion-label class="status">
+        Finalizado
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+  <div>
+
+
+  </div>
+</ion-content>

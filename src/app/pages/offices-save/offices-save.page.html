@@ -4,15 +4,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card type="button" [routerLink]="['/office']"  >
-    <ion-slides pager="true">
-      <ion-slide>
-        <ion-img src="../../assets/oficina.jpg"></ion-img>
-      </ion-slide>
-    </ion-slides>
-    
-    <ion-card-header>Oficina Completa - Hermosillo</ion-card-header>
-    <ion-card-content><span class="precio">2.000$</span> por mes</ion-card-content>
-  </ion-card>
+<ion-content class="ion-padding" >
+  <div *ngFor="let ofic of oficinas">
+    <ion-card  type="button"  [routerLink]="['/office/', ofic.office_id]"  >
+      <ion-slides pager="true">
+        <ion-slide *ngFor="let image of ofic.oficina.imagenes">
+          <ion-img src="{{url + 'oficina/image/' + image.nombre_imagen}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+      
+      <ion-card-header>{{ofic.oficina.nombre}} - {{ofic.oficina.ciudad}}</ion-card-header>
+      <ion-card-content><span class="precio">{{ofic.oficina.precio_dia}}$</span> por dia</ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

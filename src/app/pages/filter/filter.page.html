@@ -9,25 +9,16 @@
 <ion-content class="ion-padding">
   <ion-title>Filtros Populares</ion-title>
 
+  <form #filtrosForm="ngForm" (ngSubmit)="filter(filtrosForm)">
   <ion-list class="margin-top">
     <ion-label class="ion-padding">Por nombre: </ion-label>
-    <ion-input class="ion-padding input-nombre" type="text" placeholder="Buscar por nombre"></ion-input>
+    <ion-input class="ion-padding input-nombre" name="nombre" #nombre="ngModel" [(ngModel)]="filtros.nombre" type="text" placeholder="Buscar por nombre"></ion-input>
   </ion-list>
 
   <ion-title class="margin-top">Servicios</ion-title>
   <ion-list>
-    <ion-item>
-      <ion-label>Internet</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Aire Acondicionado</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Cafetera</ion-label>
+    <ion-item *ngFor="let servicio of servicios" (ionChange)="prueba(servicio, $event)">
+      <ion-label>{{servicio.nombreServicio}}</ion-label>
       <ion-checkbox></ion-checkbox>
     </ion-item>
 
@@ -39,30 +30,48 @@
   <ion-title class="margin-top">Rango de precios</ion-title>
     <p class="precio">De MXM ${{this.minPrecio}} a MXM ${{this.maxPrecio}}</p>
   <ion-item>
-    <ion-range (ionChange)="rangoPrecio($event)" step="100" dualKnobs="true" min="500" max="5000" color="secondary">
-      <ion-label slot="start">500$</ion-label>
-      <ion-label slot="end">5000$</ion-label>
+    <ion-range (ionChange)="rangoPrecio($event)" step="5" dualKnobs="true" min="10" max="500" color="secondary">
+      <ion-label slot="start">10$</ion-label>
+      <ion-label slot="end">500$</ion-label>
     </ion-range>
   </ion-item>
 
   <ion-title class="margin-top">Tipo de oficina</ion-title>
-  <ion-item>
-    <ion-label>Compartida</ion-label>
-    <ion-checkbox></ion-checkbox>
+  <ion-radio-group name="tipo_oficina">
+  <ion-item *ngFor="let tipo of data">
+    <ion-label>{{tipo.tipo}}</ion-label>
+    <ion-radio slot="end" value="{{tipo.tipo}}" (click)="tipoOficina(tipo.tipo)" ></ion-radio>
   </ion-item>
 
-  <ion-item>
-    <ion-label>Ejecutiva</ion-label>
-    <ion-checkbox></ion-checkbox>
-  </ion-item>
+  
+  </ion-radio-group>
+  
+<!--
+  <ion-list radio-group [ngModelOptions]="{standalone: true}" ngDefaultControl  [(ngModel)]="filtros.tipo_oficina">
 
- 
+    <ion-list-header>
+      Auto Manufacturers
+    </ion-list-header>
+  
+    <ion-item>
+      <ion-label>Cord</ion-label>
+      <ion-radio  value="cord"></ion-radio>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Duesenberg</ion-label>
+      <ion-radio value="duesenberg"></ion-radio>
+    </ion-item>
+  
+  </ion-list>
+  -->
+</form>
 </ion-content>
 
 <ion-footer color="white" style="background-color: white;">
   <div class="footer">
     <button class="btn-omitir">Omitir</button>
 
-    <button class="btn-aplicar">Aplicar Filtros</button>
+    <button class="btn-aplicar"  (click)="filter()">Aplicar Filtros</button>
   </div>
 </ion-footer>

@@ -7,25 +7,29 @@
 
       <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
         <ion-grid fixed>
-
-          <ion-row>
+          
+          <ion-row class="logo-texto">
             <ion-col>
               <img src="/assets/logo.svg">
             </ion-col>
+
+            <ion-text >
+              <h1>Encuentra la oficina de tus sueños</h1>
+            </ion-text>
+            <div class="wave" style="height: 70px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #ffff;"></path></svg></div>
           </ion-row>
         
-          <ion-row>
+          <ion-row class="formulario-login">
             <ion-col>
               
                 <ion-list>
-                  <ion-text color="primary">
-                    <h1>Encuentra la oficina de tus sueños</h1>
-                  </ion-text>
+              
                   <ion-item>
                     <ion-label color="primary">Email</ion-label>
                     <ion-input name="email"
                                 type="email"
                                 required
+                                #email="ngModel" [(ngModel)]="usuario.email"
                                ></ion-input>
                   </ion-item>
 
@@ -34,7 +38,7 @@
                     <ion-input name="password"
                                 type="password"
                                 required
-                                 required></ion-input>
+                                 #password="ngModel" [(ngModel)]="usuario.password"></ion-input>
                                 
                   </ion-item>
                   <div *ngIf="status == 'error'">
@@ -72,15 +76,15 @@
             <ion-row class="registro">
               <img src="/assets/logo.svg" alt="">
             <ion-col>
-                <h3>Registrate Aqui</h3>
+                <h3>Regístrate aquí</h3>
             </ion-col>
             </ion-row>
 
-            <div class="registrado-correcto" *ngIf="status == 'success'">
+            <div class="registrado-correcto" *ngIf="registrar == 'success'">
               El usuario se a registrado correctamente 
-          </div>
+            </div>
       
-          <div class="error"  *ngIf="status == 'error'">
+          <div class="error"  *ngIf="registrar == 'error'">
               El usuario no se a registrado correctamente
           </div>
         
@@ -94,38 +98,47 @@
                             <ion-label color="primary">Email</ion-label>
                             <ion-input name="email" 
                                         type="email"
-                                       
+                                        #email="ngModel" [(ngModel)]="usuario.email"
                                         required></ion-input>
                             </ion-item>
+
+                            <ion-item>
+                              <ion-label color="primary">Celular</ion-label>
+                              <ion-input name="celular" 
+                                          type="number"
+                                          #celular="ngModel" [(ngModel)]="usuario.celular"
+                                          required></ion-input>
+                              </ion-item>
 
                             <ion-item>
                             <ion-label color="primary">Nombre</ion-label>
                             <ion-input name="nombre"
                                         type="text"
-                                        
+                                        #nombre="ngModel" [(ngModel)]="usuario.nombre"
                                         required></ion-input>
                             </ion-item>
 
                             <ion-item>
-                              <ion-label color="primary">Apellido</ion-label>
-                              <ion-input name="apellido"
+                              <ion-label color="primary">Apellidos</ion-label>
+                              <ion-input name="apellidos"
                                           type="text"
-                                          
+                                          #apellidos="ngModel" [(ngModel)]="usuario.apellidos"
                                           required></ion-input>
                               </ion-item>
-
                             <ion-item>
+
+                              
+
                             <ion-label color="primary">Password</ion-label>
                             <ion-input name="password"
                                         type="password"
-                                        
+                                        #password="ngModel" [(ngModel)]="usuario.password"
                                         required></ion-input>
                             </ion-item>
 
                         </ion-list>
                     </ion-col>
                 </ion-row>
-                
                 <ion-row>
                 <ion-col>
                     <ion-button type="submit"

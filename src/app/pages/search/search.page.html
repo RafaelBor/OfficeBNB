@@ -6,14 +6,10 @@
 
     <!-- <ion-input type="text" placeholder="¿En que ciudad estas buscando?" autocomplete="on"></ion-input> -->
 
-  <input list="browsers"  placeholder="¿En que ciudad estas buscando?" autofocus="true" (keypress)="buscar($event)">
+  <input #inputCiudad list="browsers"  placeholder="¿En que ciudad estas buscando?" autofocus="true" (keypress)="buscar($event)">
 
-  <datalist id="browsers">
-      <option value="Hermosillo"></option>
-      <option value="Monterrey"></option>
-      <option value="Navojoa"></option>
-      <option value="Cd. Obregon"></option>
-      <option value="CDMX"></option>
+  <datalist id="browsers" >
+      <option *ngFor="let ciudad of ciudades" value="{{ciudad.nombre_ciudad}}"></option>   
   </datalist>
 
   <ion-icon class="btn-buscar" slot="end" (click)="buscar2()" name="search"></ion-icon>

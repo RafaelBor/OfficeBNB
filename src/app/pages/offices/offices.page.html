@@ -1,11 +1,13 @@
+
+<div *ngIf="oficinas">
 <ion-header *ngIf="scroll > 150">
-  <ion-toolbar>
+  <ion-toolbar *ngIf="oficinas">
     <div class="header-oficinas">
       <div class="header-title">
         <ion-buttons slot="start">
           <ion-back-button defaultHref="/tabs/home"></ion-back-button>
         </ion-buttons>
-        <ion-label class="title-country">Hermosillo</ion-label>
+        <ion-label class="title-country">{{ciudad}}</ion-label>
       </div>
 
       <div>
@@ -17,7 +19,7 @@
   </div>
   </ion-toolbar>
 </ion-header>
-
+</div>
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
   <div class="contenedor-mapa">
     <div id='map'></div>
@@ -27,7 +29,7 @@
         <ion-icon name="arrow-back"></ion-icon>
       </a>
 
-      <ion-label class="title-country">Hermosillo</ion-label>
+      <ion-label *ngIf="oficinas" class="title-country">{{ciudad}}</ion-label>
 
         <button class="calendario" (click)="calendar()">Fechas</button>
 
@@ -42,35 +44,30 @@
       
   
 
-  <div class="ion-padding">
+  <div class="ion-padding" *ngIf="oficinas">
     <div class="numero-oficinas"> 
 
-      <ion-label>2 oficinas encontradas</ion-label>
+      <ion-label>{{oficinasObtenidas}} oficinas encontradas</ion-label>
+      
+    </div>
+
+    <div *ngIf="oficinas.length > 0" class="contenido-oficinas">
+      <ion-card *ngFor="let oficina of oficinas" type="button"  [routerLink]="['/office/', oficina.id]"  >
+        <ion-slides pager="true">
+          <ion-slide *ngFor="let image of oficina.imagenes">
+            <ion-img src="{{url + 'oficina/image/' + image.nombre_imagen}}"></ion-img>
+          </ion-slide>
+        </ion-slides>
+        
+        <ion-card-header>{{oficina.nombre}} - {{oficina.ciudad}}</ion-card-header>
+        <ion-card-content *ngIf="dias"><span class="precio">{{oficina.precio_dia}}$</span> por dia</ion-card-content>
+        <ion-card-content *ngIf="horas"><span class="precio">{{oficina.precio_hora}}$</span> por hora</ion-card-content>
+      </ion-card>
 
     </div>
 
-    <div class="contenido-oficinas">
-      <ion-card type="button" [routerLink]="['/office']"  >
-        <ion-slides pager="true">
-          <ion-slide *ngFor="let image of imagenes">
-            <ion-img src="../../assets/{{image}}"></ion-img>
-          </ion-slide>
-        </ion-slides>
-        
-        <ion-card-header>Oficina Completa - Hermosillo</ion-card-header>
-        <ion-card-content><span class="precio">2.000$</span> por mes</ion-card-content>
-      </ion-card>
-
-      <ion-card>
-        <ion-slides pager="true">
-          <ion-slide>
-            <ion-img src="../../assets/oficina.jpg"></ion-img>
-          </ion-slide>
-        </ion-slides>
-        
-        <ion-card-header>Oficina Completa - Hermosillo</ion-card-header>
-        <ion-card-content><span class="precio">2.000$</span> por mes</ion-card-content>
-      </ion-card>
+    <div *ngIf="oficinas.length == 0">
+      <h2>No se encontraron oficinas en {{ciudad}}</h2>
     </div>
   </div>
 </ion-content>

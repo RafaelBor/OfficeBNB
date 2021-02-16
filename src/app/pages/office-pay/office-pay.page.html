@@ -1,50 +1,56 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar *ngIf="oficina">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/rules-office"></ion-back-button>
+      <ion-back-button defaultHref="/rules-office/{{oficina.id}}"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="oficina">
   <h2 class="bold">Revisar y pagar</h2>
 
   <div class="header-office section">
     <div class="informacion-oficina">
-      <p class="bold">Oficina completa / Hotel san angel</p>
-      <p class="date">01 de sep - 01 de oct</p>
+      <p class="bold">{{oficina.nombre}}</p>
+      <p class="date" *ngIf="dias">{{fecha_inicio |date:"mediumDate"}} - {{fecha_final |date:"mediumDate"}}</p>
+      <p class="date" *ngIf="horas">{{this.dia |date:"mediumDate"}} : {{this.horaInicioFormat}}:00 - {{this.horaFinalFormat}}:00</p>
     </div>
-    <ion-img class="imagen-oficina"  src="../../assets/oficina.jpg"></ion-img>
+    <ion-img class="imagen-oficina"  src="{{url + 'oficina/image/' + oficina.imagenes[0].nombre_imagen}}"></ion-img>
   </div>
-
   <div class="section">
     <div class="contenido-precios">
       <div class="precios">
-        <ion-label>$2,000 por 1 mes</ion-label>
-        <ion-label>$2,000</ion-label>
+        <ion-label *ngIf="dias == true">${{oficina.precio_dia}} por dia</ion-label>
+        <ion-label *ngIf="horas == true">${{oficina.precio_hora}} por hora</ion-label>
+        <ion-label>${{precio_renta}}</ion-label>
       </div>
-  
+
+      <div class="precios">
+        <ion-label>Descuento</ion-label>
+        <ion-label>${{this.descuento}}</ion-label>
+      </div>
+
       <div class="precios border-bottom">
         <ion-label>Comisión por servicio</ion-label>
-        <ion-label>$360</ion-label>
+        <ion-label>${{comision}}</ion-label>
       </div>
   
       <div class="precios">
         <ion-label>Total(MXM)</ion-label>
-        <ion-label>$2,360</ion-label>
+        <ion-label>${{total}}</ion-label>
       </div>
     </div>
   </div>
 
-  <div class="section metodo-pago">
+  <div class="section metodo-pago" (click)="buscarCupon()">
     <ion-img class="img-pago" src="../../assets/mas.svg"></ion-img>
-    <ion-label>Agregar metodo de pago</ion-label>
+    <ion-label>Agregar Cupon</ion-label>
     <ion-icon name="arrow-forward"></ion-icon>
   </div>
-
+  
   <div class="texto-politicas">
   <ion-text >Acepto las reglas acordadas de la oficina, como tambien pagar el importe total indicado, que inclute las comisiones por el servicio.</ion-text>
   </div>
 
-  <ion-button expand="full" [routerLink]="['/credit-card-details']">Confirma y paga</ion-button>
+  <ion-button expand="full" [routerLink]="['/credit-card-details', oficina.id]">Confirma y paga</ion-button>
 </ion-content>

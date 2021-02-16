@@ -5,6 +5,10 @@ import { NavController } from '@ionic/angular';
 import { CalendarComponentOptions, CalendarModalOptions, CalendarModal, DayConfig, CalendarResult } from 'ion2-calendar';
 
 import { FilterPage } from '../filter/filter.page';
+import {FiltrosService} from '../../services/filtros.service'
+import {global} from '../../services/global'
+import { Storage } from '@ionic/storage';
+import {filtros} from '../../models/filtros'
 
 
 declare var mapboxgl:any;
@@ -19,6 +23,14 @@ export class OfficesPage implements OnInit, AfterViewInit {
   public scrollAct: number = 1
   imagenes = ['oficina.jpg', 'oficina_2.jpg'];
 
+  public ciudad;
+  public oficinas;
+  public url;
+  public filtros: filtros
+  public oficinasObtenidas;
+
+  public horas = false;
+  public dias = false;
   
 
   dateRange: { from: string; to: string; };
@@ -35,14 +47,105 @@ export class OfficesPage implements OnInit, AfterViewInit {
   
   constructor(
     public modalCtrl: ModalController,
-    private navCtrl: NavController
-  ) { }
+    private navCtrl: NavController,
+    private _filtros: FiltrosService,
+    private storage: Storage
+  ) {
+    
+    this.url = global.url
+    this.storage.get('ciudad').then((ciudad) =>{
+      this.ciudad = ciudad;
+    });
 
-  ngOnInit() {
+    
+
+    this.filtros = new filtros("", "", "", "", "", "", "", []);
+   }
+
+  async ngOnInit() {
+    
+   await this.obtenerOficinas();
+   this.storage.get('reservarHoras').then((horas) =>{
+    if(horas != undefined)
+    {
+      this.horas = true
+      console.log(this.horas, "horas");
+      return this.horas
+    }else{
+      this.horas = false
+    }
+  });
+
+  this.storage.get('reservarDias').then((dias) =>{
+    if(dias != undefined)
+    {
+      this.dias = true
+      this.filtros.fecha_inicio = dias.fecha_inicio;
+      this.filtros.fecha_final = dias.fecha_final;
+      console.log(this.dias, "dias");
+      return this.dias
+    }
+    else{
+      this.dias = false
+    }
+  });
   }
 
-  mostrarOficina(){
-    this.navCtrl.navigateRoot('/office', {animated: true});
+  obtenerOficinas()
+  {
+    let ciudad = this.storage.get('ciudad').then((ciud) =>{
+      ciudad = ciud;
+      this.filtros.ciudad = ciud;
+      console.log(this.filtros);
+      this._filtros.Filtros(this.filtros).subscribe(
+        response =>{
+          if(response.status == "success")
+          {
+            this.oficinas = response.oficinas;
+            this.oficinasObtenidas = this.oficinas.length;
+           
+            if(this.oficinas.length > 0){
+              mapboxgl.accessToken = 'pk.eyJ1IjoicmFmYWVsYm9yIiwiYSI6ImNrZTYzand1NDE5Y20ycXB1am9mbjFuOTgifQ.RHArcX_yJnsWGVjYawixxg';
+              const map = new mapboxgl.Map({
+              container: 'map',
+              center: [this.oficinas[0].long_ubicacion, this.oficinas[0].lat_ubicacion],
+              zoom: 10,
+              style: 'mapbox://styles/mapbox/streets-v11'
+              });
+        
+              console.log(this.oficinas);
+            for(let i=0; i<this.oficinas.length; i++)
+            {
+              var marker = new mapboxgl.Marker()
+              .setLngLat([this.oficinas[i].long_ubicacion, this.oficinas[i].lat_ubicacion])
+              .addTo(map);
+            }
+            }
+         
+  
+            else
+            {
+             
+              mapboxgl.accessToken = 'pk.eyJ1IjoicmFmYWVsYm9yIiwiYSI6ImNrZTYzand1NDE5Y20ycXB1am9mbjFuOTgifQ.RHArcX_yJnsWGVjYawixxg';
+                const map = new mapboxgl.Map({
+                container: 'map',
+                center: [-99.70465124688212, 21.0560994973209],
+                zoom: 10,
+                style: 'mapbox://styles/mapbox/streets-v11'
+                });
+            }
+          }
+        }
+      )
+    })
+    
+  
+  }
+
+ 
+
+  mostrarOficina(id: number){
+    this.navCtrl.navigateRoot('/office/' + id, {animated: true});
   }
 
   async calendar()
@@ -56,11 +159,21 @@ export class OfficesPage implements OnInit, AfterViewInit {
       component: FilterPage,
       cssClass: 'my-custom-class'
     });
-    return await modal.present();
-  
+     await modal.present();
+    
+    const {data} = await modal.onWillDismiss();
+    console.log(data);
+
+    if(data != undefined){
+    this.filtros.nombre = data.filtros.nombre;
+    this.filtros.rango_inicio = data.filtros.rango_inicio;
+    this.filtros.rango_final = data.filtros.rango_final;
+    this.filtros.servicios = data.filtros.servicios;
+    this.filtros.tipo_oficina = data.filtros.tipo_oficina;
+    this.obtenerOficinas();
+    }
+    
   }
-
-
 
   //Abrir modal de calendario
   
@@ -81,7 +194,7 @@ export class OfficesPage implements OnInit, AfterViewInit {
     presentingElement: await this.modalCtrl.getTop()
   });
 
-  console.log("asfasf");
+  
   myCalendar.present();
 
   const event : any = await myCalendar.onDidDismiss();
@@ -102,21 +215,7 @@ export class OfficesPage implements OnInit, AfterViewInit {
   //Mapa
   ngAfterViewInit()
   {
-    mapboxgl.accessToken = 'pk.eyJ1IjoicmFmYWVsYm9yIiwiYSI6ImNrZTYzand1NDE5Y20ycXB1am9mbjFuOTgifQ.RHArcX_yJnsWGVjYawixxg';
-      const map = new mapboxgl.Map({
-      container: 'map',
-      center: [-110.97732, 29.1026],
-      zoom: 11,
-      style: 'mapbox://styles/mapbox/streets-v11'
-      });
-
-      var marker = new mapboxgl.Marker()
-        .setLngLat([-110.97732, 29.1026])
-        .addTo(map);
-
-        var marker = new mapboxgl.Marker()
-        .setLngLat([-110.997434, 29.0937761])
-        .addTo(map);
+   
   } 
 
   //Scrolling

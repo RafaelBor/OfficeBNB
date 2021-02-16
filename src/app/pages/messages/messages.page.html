@@ -6,7 +6,22 @@
 
 <ion-content class="ion-padding">
 
-  <ion-label class="subtitle">No tienes mensajes sin leer</ion-label>
-  <br>
-  <ion-text>Cuanto te comuniques con un anfitrion o envies una solicitud de reservacion, tus mensajes van aparecer aca.</ion-text>
+  <div *ngIf="usuario == null && arrendador == null">
+    <ion-label class="subtitle">No tienes mensajes sin leer</ion-label>
+    <br>
+    <ion-text>Cuanto te comuniques con un anfitrion o envies una solicitud de reservacion, tus mensajes van aparecer aca.</ion-text>
+  </div>
+
+  <div *ngIf="arrendador.length > 0">
+    <h3>arrendador</h3>
+  </div>
+
+  <div *ngIf="usuario.length > 0" >
+    <div class="mensaje">
+      <img src="../../../assets/thanks.png" alt="">
+      <div class="mensaje-texto">
+        <p>Acabas de reservar una oficina</p>
+      </div>
+    </div>
+  </div>
 </ion-content>

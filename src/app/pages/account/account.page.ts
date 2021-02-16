@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NavController} from '@ionic/angular';
+import {LoginService} from '../../services/login.service'
 
 @Component({
   selector: 'app-account',
@@ -8,11 +9,16 @@ import { NavController} from '@ionic/angular';
 })
 export class AccountPage implements OnInit {
 
+  public identity;
+
   constructor(
     private navCtrl: NavController,
+    private _login: LoginService
   ) { }
 
-  ngOnInit() {
+ async ngOnInit() {
+    this.identity = await this._login.getIdentity();
+    console.log(this.identity);
   }
 
   userEdit()
@@ -21,7 +27,8 @@ export class AccountPage implements OnInit {
   }
 
   logout(){
-    this.navCtrl.navigateRoot('/login', {animated: true});
+    this._login.logout();
+    
   }
 
 

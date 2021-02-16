@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <button class="cerrar-modal" slot="start" (click)="cerrarModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <ion-title>Ingresa Cupon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #buscarCupon="ngForm" (ngSubmit)="onSubmit(buscarCupon)">
+    <ion-item>
+      <ion-label position="fixed">Nombre: </ion-label>
+      <ion-input name="nombreCupon" #nombreCupon="ngModel" [(ngModel)]="cupon.nombreCupon"></ion-input>
+    </ion-item>
+
+    <p *ngIf="status == 'aceptado'">Cupon aceptado</p>
+    <p *ngIf="status == 'no aceptado'" class="no-aceptado">Cupon no aceptado</p>
+    <ion-button type="submit" expand="block" color="primary">Buscar</ion-button>
+  </form>
+</ion-content>

@@ -9,24 +9,28 @@
 
 
 <ion-content>
-  <ion-item>
-    <ion-label>Selecciona el dia</ion-label>
-    <ion-datetime displayFormat="DD MMM YYYY" placeholder="¿Que dia rentaras?"></ion-datetime>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>Hora de inicio</ion-label>
-    <ion-datetime displayFormat="HH" placeholder="¿A que horas llegaras?"></ion-datetime>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>Hora final</ion-label>
-    <ion-datetime displayFormat="HH" placeholder="¿A que horas te iras?"></ion-datetime>
-  </ion-item>
+  <form #fechasForm="ngForm" (ngSubmit)="onSubmit(fechasForm)" class="contenido-form">
+
+    <div>
+      <ion-item>
+        <ion-label>Selecciona el dia</ion-label>
+        <ion-datetime required displayFormat="DD MMM YYYY" name="dia" #dia="ngModel" [(ngModel)]="horas.dia" placeholder="¿Que dia rentaras?"></ion-datetime>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Hora de inicio</ion-label>
+        <ion-datetime required displayFormat="HH:mm" minuteValues="0"  name="horaInicio" #horaInicio="ngModel" [(ngModel)]="horas.horaInicio" placeholder="¿A que horas llegaras?"></ion-datetime>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Hora final</ion-label>
+        <ion-datetime required displayFormat="HH:mm" minuteValues="0" name="horaSalida" #horaSalida="ngModel" [(ngModel)]="horas.horaSalida" placeholder="¿A que horas te iras?"></ion-datetime>
+      </ion-item>
+      
+      <p *ngIf="status" class="status">{{this.status}}</p>
+  </div>
+
+  <ion-button fixed="bottom" [disabled]="fechasForm.invalid" type="submit"  expand="full">Buscar</ion-button>
+</form>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-button (click)="buscar()" expand="full">Buscar</ion-button>
-  </ion-toolbar>
-</ion-footer>

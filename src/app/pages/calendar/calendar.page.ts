@@ -6,7 +6,8 @@ import { CalendarComponent } from 'ionic2-calendar';
 import { ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
-
+import * as moment from 'moment';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class CalendarPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     public modalCtrl: ModalController,
+    private storage: Storage
 
   ) { }
 
@@ -80,9 +82,21 @@ export class CalendarPage implements OnInit {
     });
     this.navCtrl.navigateRoot('/tabs/offices', {animated: true});
   }
-  console.log(date);
-  console.log('role', role);
 
+  var reservarDias = {
+    fecha_inicio: date.from.string,
+    fecha_final: date.to.string
+  }
+
+  this.storage.set('reservarDias', reservarDias);
+
+  this.storage.remove('reservarHoras');
+  
+  console.log(moment(date).format('LL') ); 
+ // this.storage.set('fecha_inicio', date.from.string);
+ // this.storage.set('fecha_final', date.to.string);
+  //localStorage.setItem('fecha_inicio', date.from.string);
+  //localStorage.setItem('fecha_final', date.to.string);
   
 }
  

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import {ServiciosService} from '../../services/servicios.service'
 
 @Component({
   selector: 'app-office-services',
@@ -8,9 +9,41 @@ import { ModalController } from '@ionic/angular';
 })
 export class OfficeServicesPage implements OnInit {
 
-  constructor(public modalCtrl: ModalController) { }
+  @Input() id: number;
+  public status;
+  public servicios;
+
+  constructor(
+    public modalCtrl: ModalController,
+    private _servicios: ServiciosService
+    ) { 
+
+    }
 
   ngOnInit() {
+    
+    this.obtenerServicios();
+  }
+
+  obtenerServicios()
+  {
+    
+    this._servicios.getServiciosOficina(this.id).subscribe(
+      response =>{
+        if(response.status == "success")
+        {
+          this.servicios = response.servicios;
+          this.status == "success"
+          console.log(this.servicios);
+        }
+        else{
+          this.status == "error"
+        }
+      },error =>
+      {
+        console.log(error);
+      }
+    )
   }
 
   cerrarModal(){

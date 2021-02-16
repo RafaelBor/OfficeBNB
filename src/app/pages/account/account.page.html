@@ -1,11 +1,11 @@
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="identity">
   <div class="header-perfil">
     <ion-avatar>
       <img src="../../../assets/perfil.png">
     </ion-avatar>
     <div class="header-content">
-      <ion-label class="nombre-perfil">Rafael Borbon</ion-label>
+      <ion-label class="nombre-perfil">{{identity.nombre | titlecase}} {{identity.apellidos | titlecase}}</ion-label>
       <br>
       <a>Mi perfil</a>
     </div>
