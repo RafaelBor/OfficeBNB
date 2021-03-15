@@ -13,6 +13,8 @@ import { Stripe } from '@ionic-native/stripe/ngx';
 
 import { IonicStorageModule } from '@ionic/storage';
 
+import {Facebook} from '@ionic-native/facebook'
+
 
 
 
@@ -29,6 +31,7 @@ import { IonicStorageModule } from '@ionic/storage';
       IonicStorageModule.forRoot()],
   providers: [ 
     Stripe,
+  //  Facebook,
     { provide: RouteReuseStrategy,  useClass: IonicRouteStrategy,
        }
   ],

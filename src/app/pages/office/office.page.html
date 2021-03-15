@@ -33,10 +33,12 @@
           <div class="contenedor-guardar">
             
             <h2 class="title">{{oficina.nombre}} <span *ngIf="oficina.establecimiento">/ {{oficina.establecimiento}}</span></h2>
-            
-            <ion-icon *ngIf="existe == true" (click)="guardarOffice()" class="icon-guardar" name="heart-outline"></ion-icon>
 
-            <ion-icon *ngIf="existe == false" (click)="EliminarOficinaGuardada()" class="icon-guardar" name="heart"></ion-icon>
+            <ion-icon *ngIf="identity == null" (click)="login()" class="icon-guardar" name="heart-outline"></ion-icon>
+            
+            <ion-icon *ngIf="existe == true && identity != null" (click)="guardarOffice()" class="icon-guardar" name="heart-outline"></ion-icon>
+
+            <ion-icon *ngIf="existe == false && identity != null" (click)="EliminarOficinaGuardada()" class="icon-guardar" name="heart"></ion-icon>
            
             
           </div>
@@ -63,8 +65,19 @@
           <ion-icon  name="wifi"></ion-icon>
         </ion-item>
       </div>
-   
-    <ion-button (click)="MostrarServicios()" fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los {{numeroServicios}} servicios</ion-button>
+      <ion-button (click)="MostrarServicios()" fill="outline" expand="block" color="white" class="btn-servicios">Mostrar los {{numeroServicios}} servicios</ion-button>
+    
+    <div>
+      <h3>Reglas</h3>
+      <div *ngFor="let regla of reglas let i = index">
+        <ion-item *ngIf="i < 2" >
+          <ion-label >{{regla.nombreRegla}}</ion-label>
+          <img class="img-regla" src="../../../assets/no-stopping.svg">
+        </ion-item>
+      </div>
+      <ion-button (click)="MostrarReglas()" fill="outline" expand="block" color="white" class="btn-servicios">Mostrar las {{numeroReglas}} reglas</ion-button>
+    </div>
+
     </div>
       <h3>Ubicacion</h3>
       <p>Hermosillo, Sonora, Mexico</p>
@@ -72,7 +85,10 @@
       
     </div>
 
-    
+    <ion-item  *ngIf="identity != null">
+      <ion-label>Acepto terminos y condiciones</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="condiciones" ></ion-checkbox>
+    </ion-item>
     
 </ion-content>
 
@@ -84,7 +100,9 @@
 
         <ion-label *ngIf="this.horas" class="footer-precio"> <span class="precio"> {{oficina.precio_hora}}$</span> por hora</ion-label>
 
-        <ion-button *ngIf="statusReserva == 'disponible'" shape="round" class="btn-reserva" type="button" [routerLink]="['/rules-office', oficina.id]">Reservar</ion-button>
+        <ion-button [disabled]="condiciones != true" *ngIf="statusReserva == 'disponible' && identity != null" shape="round" class="btn-reserva" type="button" [routerLink]="['/office-pay', oficina.id]">Reservar</ion-button>
+
+        <ion-button *ngIf="identity == null" shape="round" class="btn-reserva" type="button" [routerLink]="['/login']">Iniciar Sesion</ion-button>
         <p *ngIf="statusReserva == 'ocupada'">Oficina ocupada</p>
       </div>
   </ion-toolbar>

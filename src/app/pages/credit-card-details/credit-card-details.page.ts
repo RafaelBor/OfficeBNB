@@ -67,9 +67,6 @@ export class CreditCardDetailsPage implements OnInit {
   ngOnInit() {
     this.obtenerOficina();
     this.setupStripe();
-    this.verificarExistencia();
-    
-    
   }
 
  async obtenerIdentity()
@@ -135,24 +132,8 @@ export class CreditCardDetailsPage implements OnInit {
       this.reserva.fechaFinal = null;
     }
     
-/*
-    for(let i=0; i<this.reservaUsuario.length; i++)
-    {
-
-      console.log(this.oficina.id, this.reservaUsuario[i].id_office);
-      if(this.oficina.id == this.reservaUsuario[i].id_office)
-      {
-        this.existe += 1;
-        console.log(this.existe);
-        break
-        
-      }else{
-        this.existe = 0
-      }
-    }
-    */
    console.log(this.existe);
-    if(this.existe == 0){
+  
       console.log(this.reserva)
       this._reservas.createReserva(this.reserva).subscribe(
         response =>
@@ -162,7 +143,7 @@ export class CreditCardDetailsPage implements OnInit {
             this.reserva = response.reserva;
             console.log(this.reserva);
       
-            this.nuevoMensaje(this.oficina.id_usuario, this.identity.sub)
+           // this.nuevoMensaje(this.oficina.id_usuario, this.identity.sub)
       
           }
         }, error =>
@@ -170,32 +151,11 @@ export class CreditCardDetailsPage implements OnInit {
           console.log(error);
         }
         )
-    }
-
-    if(this.existe == 1)
-    {
-      console.log("actualizada")
-      this._reservas.updateReserva(this.reserva).subscribe(
-        response =>
-        {
-          
-          if(response.status == "success")
-          {
-            this.reserva = response.changes;
-            console.log(this.reserva);
-            this.nuevoMensaje(this.oficina.id_usuario, this.identity.sub)
-              }
-              
-        }, error =>
-        {
-          console.log(error);
-        }
-      )
-    }
    
 
   }
 
+  /*
   verificarExistencia()
   {
     this.token = this._login.getToken();
@@ -224,9 +184,10 @@ export class CreditCardDetailsPage implements OnInit {
         }
       }
     )
-    */
+    
 
   }
+  */
 
   
   obtenerOficina(){

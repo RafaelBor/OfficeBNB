@@ -6,22 +6,88 @@
 
 <ion-content class="ion-padding">
 
-  <div *ngIf="usuario == null && arrendador == null">
-    <ion-label class="subtitle">No tienes mensajes sin leer</ion-label>
-    <br>
-    <ion-text>Cuanto te comuniques con un anfitrion o envies una solicitud de reservacion, tus mensajes van aparecer aca.</ion-text>
-  </div>
+  <ion-toolbar>
+    
+    <ion-row>
 
-  <div *ngIf="arrendador.length > 0">
-    <h3>arrendador</h3>
-  </div>
+      <ion-col>
+          <ion-button shape="round"
+                      expand="full"
+                      size="small"
+                      fill="outline"
+                      color="primary"
+                      (click)="mensajesUsuario()">
+            Usuario
+          </ion-button>
+      </ion-col>
 
-  <div *ngIf="usuario.length > 0" >
-    <div class="mensaje">
-      <img src="../../../assets/thanks.png" alt="">
-      <div class="mensaje-texto">
-        <p>Acabas de reservar una oficina</p>
+      <ion-col>
+        <ion-button shape="round"
+                    expand="full"
+                    size="small"
+                    fill="outline"
+                    color="primary"
+                    (click)="mensajesArrendador()">
+          Arrendador
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+
+
+
+  </ion-toolbar>
+
+  <ion-slides class="mainSlide" #slidePrincipal>
+    
+    <ion-slide>
+      <div *ngIf="usuarios.length > 0" >
+        <ion-item class="mensaje" button *ngFor="let usuario of usuarios" (click)="mostrarMensaje(usuario.id)">
+          <ion-avatar slot="start">
+            <img src="../../../assets/mensaje-usuario.png" alt="">
+          </ion-avatar>
+          <ion-label>
+            <p>Reservaste una oficina</p>
+            <p>fecha: {{usuario.updated_at | date}}</p>
+            <p>Ver informacion</p>
+          </ion-label>
+        </ion-item>
+       
       </div>
-    </div>
-  </div>
+
+      <div *ngIf="usuarios.length == 0">
+        <ion-label class="subtitle">No has reservado ninguna oficina</ion-label>
+        <br>
+        <ion-text>Cuando reserves una oficina la informacion del arrendador aparecera aqui.</ion-text>
+      </div>
+  
+    </ion-slide>
+
+
+
+    <ion-slide>
+      <div *ngIf="arrendadores.length > 0">
+        <ion-item class="mensaje" button *ngFor="let arrendador of arrendadores "(click)="mostrarMensajeArrendador(arrendador.id)">
+          <ion-avatar slot="start">
+            <img src="../../../assets/mensaje-arrendador.png" alt="">
+          </ion-avatar>
+          <ion-label>
+            <p>Hicieron una reservacion</p>
+            <p>fecha: {{arrendador.updated_at | date}}</p>
+            <p>Ver informacion</p>
+          </ion-label>
+        </ion-item>
+      </div>
+
+      <div *ngIf="arrendadores.length == 0">
+        <ion-label class="subtitle">No tienes reservaciones en tus oficinas</ion-label>
+        <br>
+        <ion-text>Cuando un usuario reserve una de tus oficinas la informacion aparecera aqui.</ion-text>
+      </div>
+    </ion-slide>
+
+
+  </ion-slides>
+
+
 </ion-content>

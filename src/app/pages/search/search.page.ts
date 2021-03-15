@@ -17,7 +17,10 @@ export class SearchPage implements OnInit {
   @ViewChild(OfficesPage, {static: true}) ciudad: OfficesPage
 
   public ciudades;
-
+  public filtros = {
+    ciudad: "",
+    tipo: ""
+  }
   constructor(
     private navCtrl: NavController,
     private _filtros: FiltrosService,
@@ -45,8 +48,10 @@ export class SearchPage implements OnInit {
    this._filtros.ciudad = this.inputCiudad.nativeElement.value;
 
   // localStorage.setItem('ciudad', this.inputCiudad.nativeElement.value);
+  this.filtros.ciudad = this.inputCiudad.nativeElement.value;
+  
 
-   this.storage.set('ciudad', this.inputCiudad.nativeElement.value);
+   this.storage.set('ciudad', this.filtros);
   }
 
   obtenerCiudades()

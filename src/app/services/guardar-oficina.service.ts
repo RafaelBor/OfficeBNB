@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {global} from './global';
+import {environment} from '../../environments/environment'
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 
@@ -21,7 +21,7 @@ export class GuardarOficinaService {
     
   ) { 
     
-    this.url = global.url;
+    this.url = environment.apiUrl;
   }
 
   async presentToast(message: string) {

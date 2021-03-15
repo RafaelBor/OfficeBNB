@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {global} from './global';
+import {environment} from '../../environments/environment'
 
 import { Storage} from '@ionic/storage';
 import { NavController} from '@ionic/angular';
@@ -22,7 +22,7 @@ export class LoginService {
     private storage: Storage,
     private navCtrl: NavController
   ) {
-    this.url = global.url;
+    this.url = environment.apiUrl;
    }
 
    register(user): Observable<any>{

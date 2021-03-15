@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarComponentOptions, CalendarModalOptions, CalendarModal, DayConfig, CalendarResult } from 'ion2-calendar';
 import { ModalController } from '@ionic/angular';
 import { NavController} from '@ionic/angular';
-import { CalendarComponent } from 'ionic2-calendar';
-import { ViewChild, Inject, LOCALE_ID } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { formatDate } from '@angular/common';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
+import {OficinaService} from '../../services/oficina.service'
+
 
 
 @Component({
@@ -19,24 +17,48 @@ export class CalendarPage implements OnInit {
   
   dateRange: { from: string; to: string; };
   type: 'string'
+  public tipos;
 
   optionsRange: CalendarComponentOptions = {
     pickMode: 'range',
     weekdays: ['Lun','Mar','Mie','Jue','Vie','Sab','Dom'],
     monthPickerFormat: ['Enero','Febrero','mars','avril ,mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
     color: 'primary'
-  
   };
+  public active:boolean = false;
 
   constructor(
     private navCtrl: NavController,
     public modalCtrl: ModalController,
-    private storage: Storage
+    private storage: Storage,
+    private _oficina: OficinaService
 
   ) { }
 
   ngOnInit() {
+    this.obtenerTiposOficina();
+  }
+
+  tipoOficina(event)
+  {
+    console.log(event.detail.value);
+
+    this.storage.get('ciudad').then((ciudad) =>{
+      ciudad.tipo = event.detail.value;
+      this.storage.set('ciudad', ciudad);
+    });
     
+    this.active = true;
+  }
+
+  obtenerTiposOficina()
+  {
+    this._oficina.tiposOficina().subscribe(
+      res => {
+        this.tipos = res.data
+        console.log(this.tipos)
+       }
+    )
   }
 
   horas()

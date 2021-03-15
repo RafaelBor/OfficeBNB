@@ -8,6 +8,7 @@ import {ServiciosService} from '../../services/servicios.service'
   templateUrl: './filter.page.html',
   styleUrls: ['./filter.page.scss'],
 })
+
 export class FilterPage implements OnInit {
   public minPrecio;
   public maxPrecio;
@@ -32,7 +33,7 @@ export class FilterPage implements OnInit {
     public modalCtrl: ModalController,
     private _servicios: ServiciosService
   ) { 
-    this.filtros = new filtros("", "", "", "", "", "", "", []);
+    this.filtros = new filtros("", "", "", "", "", "", "", [], "", "");
     
   }
 

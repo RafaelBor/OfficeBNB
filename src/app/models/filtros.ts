@@ -7,6 +7,9 @@ export class filtros{
         public tipo_oficina:string,
         public rango_inicio:string,
         public rango_final:string,
-        public servicios:Array<string>
+        public servicios:Array<string>, 
+        public rango_hora_inicio:string,
+        public rango_hora_final:string,
+
     ){}
 }

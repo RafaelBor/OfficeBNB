@@ -2,11 +2,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 
-import { CalendarComponentOptions, CalendarModalOptions, CalendarModal, DayConfig, CalendarResult } from 'ion2-calendar';
-
 import { FilterPage } from '../filter/filter.page';
 import {FiltrosService} from '../../services/filtros.service'
-import {global} from '../../services/global'
+import {environment} from '../../../environments/environment'
 import { Storage } from '@ionic/storage';
 import {filtros} from '../../models/filtros'
 
@@ -21,7 +19,6 @@ declare var mapboxgl:any;
 export class OfficesPage implements OnInit, AfterViewInit {
   public scroll: any
   public scrollAct: number = 1
-  imagenes = ['oficina.jpg', 'oficina_2.jpg'];
 
   public ciudad;
   public oficinas;
@@ -29,20 +26,14 @@ export class OfficesPage implements OnInit, AfterViewInit {
   public filtros: filtros
   public oficinasObtenidas;
 
+  
+  public minPrecio:string;
+  public maxPrecio:string;
   public horas = false;
   public dias = false;
   
 
-  dateRange: { from: string; to: string; };
-  type: 'string'
 
-  optionsRange: CalendarComponentOptions = {
-    pickMode: 'range',
-    weekdays: ['Lun','Mar','Mie','Jue','Vie','Sab','Dom'],
-    monthPickerFormat: ['Enero','Febrero','mars','avril ,mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
-    color: 'primary'
-  
-  };
 
   
   constructor(
@@ -52,14 +43,14 @@ export class OfficesPage implements OnInit, AfterViewInit {
     private storage: Storage
   ) {
     
-    this.url = global.url
+    this.url = environment.apiUrl
     this.storage.get('ciudad').then((ciudad) =>{
-      this.ciudad = ciudad;
+      this.ciudad = ciudad.ciudad;
     });
 
     
 
-    this.filtros = new filtros("", "", "", "", "", "", "", []);
+    this.filtros = new filtros("", "", "", "", "", "", "", [], "", "");
    }
 
   async ngOnInit() {
@@ -94,11 +85,14 @@ export class OfficesPage implements OnInit, AfterViewInit {
   obtenerOficinas()
   {
     let ciudad = this.storage.get('ciudad').then((ciud) =>{
-      ciudad = ciud;
-      this.filtros.ciudad = ciud;
+      ciudad = ciud.ciudad;
+      console.log(this.filtros)
+      this.filtros.ciudad = ciud.ciudad;
+      this.filtros.tipo_oficina = ciud.tipo;
       console.log(this.filtros);
       this._filtros.Filtros(this.filtros).subscribe(
         response =>{
+          console.log(response)
           if(response.status == "success")
           {
             this.oficinas = response.oficinas;
@@ -148,10 +142,7 @@ export class OfficesPage implements OnInit, AfterViewInit {
     this.navCtrl.navigateRoot('/office/' + id, {animated: true});
   }
 
-  async calendar()
-  {
-    this.openCalendar();
-  }
+
 
   async filter()
   {
@@ -177,39 +168,36 @@ export class OfficesPage implements OnInit, AfterViewInit {
 
   //Abrir modal de calendario
   
-  async openCalendar() {
-    const options: CalendarModalOptions = {
-      pickMode: 'range',
-      title: 'Fechas',
-      color:'primary',
-      weekdays: ['Lun','Mar','Mie','Jue','Vie','Sab','Dom'],
-      doneLabel: "buscar",
-      
-      
-    };
+ 
 
-  let myCalendar =  await this.modalCtrl.create({
-    component: CalendarModal,
-    componentProps: { options },
-    presentingElement: await this.modalCtrl.getTop()
-  });
+rangoPrecio(event)
+{
+    this.minPrecio = event.detail.value.lower;
+    this.maxPrecio = event.detail.value.upper;
+ 
+    if(this.dias)
+    {
+      if(this.maxPrecio != undefined && this.minPrecio != undefined)
+        {
+          this.filtros.rango_inicio = this.minPrecio;
+          this.filtros.rango_final = this.maxPrecio;  
+        }
+    }
 
-  
-  myCalendar.present();
+    if(this.horas)
+    {
+      if(this.maxPrecio != undefined && this.minPrecio != undefined)
+        {
+          this.filtros.rango_hora_inicio = this.minPrecio;
+          this.filtros.rango_hora_final = this.maxPrecio;  
+        }
+    }
+    
+}
 
-  const event : any = await myCalendar.onDidDismiss();
-  const {data: date, role} = event;
-
-  if (role === 'done') {
-    this.dateRange = Object.assign({}, {
-      from: date.from.dateObj,
-      to: date.to.dateObj
-    });
-  }
-  console.log(date);
-  console.log('role', role);
-
-
+actualizarOficinas()
+{
+  this.obtenerOficinas();
 }
 
   //Mapa

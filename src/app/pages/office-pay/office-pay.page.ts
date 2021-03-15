@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
-import {global} from '../../services/global'
+import {environment} from '../../../environments/environment'
 import { ModalController } from '@ionic/angular';
 import {OficinaService} from '../../services/oficina.service'
 import {ReservasService} from '../../services/reservas.service'
@@ -51,7 +51,7 @@ export class OfficePayPage implements OnInit {
     //this.fecha_final =  localStorage.getItem('fecha_final');
     
     this.comision = 300;
-    this.url = global.url;
+    this.url = environment.apiUrl;
 
     this.storage.get('reservarHoras').then((horas) =>{
       if(horas != undefined)

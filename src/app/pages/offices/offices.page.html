@@ -11,7 +11,7 @@
       </div>
 
       <div>
-        <button class="calendario" (click)="calendar()">Fechas</button>
+        
         <button class="filtro" (click)="filter()">
           <ion-icon class="icon-options margin-right" name="options"></ion-icon>
         </button>
@@ -31,7 +31,7 @@
 
       <ion-label *ngIf="oficinas" class="title-country">{{ciudad}}</ion-label>
 
-        <button class="calendario" (click)="calendar()">Fechas</button>
+        <button class="calendario" >Fechas</button>
 
       <button class="filtro" (click)="filter()" >
         <ion-icon class="icon-options" name="options"></ion-icon>
@@ -50,6 +50,17 @@
       <ion-label>{{oficinasObtenidas}} oficinas encontradas</ion-label>
       
     </div>
+
+   <div>
+      <p class="precioRango">De MXM ${{this.minPrecio}} a MXM ${{this.maxPrecio}}</p>
+    <ion-item>
+      <ion-range (ionChange)="rangoPrecio($event)" step="5" dualKnobs="true" min="10" max="500" color="secondary">
+        <ion-label slot="start">10$</ion-label>
+        <ion-label slot="end">500$</ion-label>
+      </ion-range>
+      <ion-button (click)="actualizarOficinas()">Actualizar</ion-button>
+    </ion-item>
+  </div>
 
     <div *ngIf="oficinas.length > 0" class="contenido-oficinas">
       <ion-card *ngFor="let oficina of oficinas" type="button"  [routerLink]="['/office/', oficina.id]"  >

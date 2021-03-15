@@ -6,15 +6,36 @@
 
 <ion-content>
 
-  <ion-item>
-    <ion-label type="button" (click)="horas()">Por horas</ion-label>
-    <ion-icon name="time"></ion-icon>
+  <ion-item color="secondary">
+    <ion-label>
+      Selecciona el tipo de oficina
+    </ion-label>
+  </ion-item>
+  
+  <ion-item class="tipo">
+    <ion-label>Tipo de oficina</ion-label>
+    <ion-select placeholder="Seleccionar" (ionChange)="tipoOficina($event)">
+      <ion-select-option *ngFor="let tipo of tipos" value="{{tipo.id}}">{{tipo.tipo_oficina}}</ion-select-option>
+    </ion-select>
   </ion-item>
 
-  <ion-item type="button" (click)="dias()">
-    <ion-label>Por días</ion-label>
-    <ion-icon name="calendar"></ion-icon>
-  </ion-item>
+  
+  <div *ngIf="active == true">
+    <ion-item color="secondary">
+      <ion-label>
+        Selecciona el tiempo de reserva
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label type="button" (click)="horas()">Por horas</ion-label>
+      <ion-icon name="time"></ion-icon>
+    </ion-item>
+
+    <ion-item type="button" (click)="dias()">
+      <ion-label>Por días</ion-label>
+      <ion-icon name="calendar"></ion-icon>
+    </ion-item>
+  </div>
 
 </ion-content>
 

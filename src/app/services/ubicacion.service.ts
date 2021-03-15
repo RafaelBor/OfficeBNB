@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {global} from './global';
+import {environment} from '../../environments/environment'
 
 
 
@@ -15,7 +15,7 @@ export class UbicacionService {
   constructor(
     public _http: HttpClient
   ) {
-    this.url = global.url;
+    this.url = environment.apiUrl
    }
 
    obtenerDatos(): Observable<any>

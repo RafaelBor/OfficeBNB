@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GuardarOficinaService} from '../../services/guardar-oficina.service'
-import {global} from '../../services/global'
+import {environment} from '../../../environments/environment'
 import {LoginService} from '../../services/login.service'
 
 
@@ -22,7 +22,7 @@ export class OfficesSavePage implements OnInit {
   
   ) { 
     
-    this.url = global.url
+    this.url = environment.apiUrl
     
   }
 

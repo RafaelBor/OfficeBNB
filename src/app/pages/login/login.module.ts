@@ -8,6 +8,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 
+//import {Facebook} from '@ionic-native/facebook'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,11 @@ import { LoginPage } from './login.page';
     IonicModule,
     LoginPageRoutingModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  providers: [ 
+
+
+   
+  ],
 })
 export class LoginPageModule {}

@@ -21,6 +21,7 @@ ion-img
 
 .title-country{
     font-weight: bold;
+    
 }
 
 .header-oficinas{
@@ -63,8 +64,6 @@ ion-card{
 
 .buscador{
     display: flex;
-    
-    
    justify-content: center;
     background-color: white;
     border-radius: 15%;
@@ -75,6 +74,7 @@ ion-card{
     position: absolute;
     top: 20px;
     left: 50px;
+    
 }
 
 
@@ -132,4 +132,12 @@ ion-card{
     text-decoration: none;
     color: black;
     font-size: 20px;
+}
+
+.precioRango{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    color: rgb(133, 126, 126);
 }

@@ -6,6 +6,8 @@ import {Usuario} from '../../models/usuario'
 import {LoginService} from '../../services/login.service'
 import { Storage } from '@ionic/storage';
 
+//import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -20,12 +22,14 @@ export class LoginPage implements OnInit {
   public token;
   public identity;
   public registrar:string;
+  public condiciones:false
 
   constructor(
     private navCtrl: NavController,
  
     private _login: LoginService,
-    private storage: Storage
+    private storage: Storage,
+   // private fb: Facebook
   ) {
     this.usuario = new Usuario(1, 1, "", "", "", "", "", "", "");
    }
@@ -98,6 +102,25 @@ export class LoginPage implements OnInit {
     )
   }
 
+  loginFb()
+  {
+    /*
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+  .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
+  .catch(e => console.log('Error logging into Facebook', e));
+  */
+  }
+
+  condicionesYterminos()
+  {
+    this.navCtrl.navigateRoot('/rules-office', {animated: true});
+  }
+
+  home()
+  {
+    this.navCtrl.navigateRoot('/tabs/home', {animated: true});
+  }
+
   mostrarRegistro(){
     this.slides.lockSwipes( false );
     this.slides.slideTo(0);
@@ -111,3 +134,7 @@ export class LoginPage implements OnInit {
   }
 
 }
+
+
+
+

@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/messages"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="reserva">
+    <h2>Han reservado una de tus oficinas</h2>
+    <p>Reservaron la oficina en la ciudad de {{reserva.oficina.ciudad}} en el establecimiento {{reserva.oficina.establecimiento}}.</p>
+
+    <div *ngIf="reserva.fechaInicio != null">
+      En las fechas {{reserva.fechaInicio}} a {{reserva.fechaFinal}}
+    </div>
+
+    <div *ngIf="reserva.diaReserva != null">
+      En la fecha {{reserva.diaReserva}} de {{reserva.horaInicio | date: 'HH'}}:00 a {{reserva.horaFinal | date: 'HH'}}:00
+    </div>
+
+    <div>
+      <p>Informacion del usuario</p>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            Nombre: {{reserva.usuario.nombre}} {{reserva.usuario.apellidos}}
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Email: {{reserva.usuario.email}} 
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Celular: {{reserva.usuario.celular}} 
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <p>Favor de ponerse en contacto con el usuario para proceder con la reserva.</p>
+    </div>
+  </div>
+
+ 
+</ion-content>

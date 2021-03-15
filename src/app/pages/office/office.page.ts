@@ -6,13 +6,14 @@ import { AlertController } from '@ionic/angular';
 
 import {OfficeServicesPage} from '../office-services/office-services.page'
 import {GuardarOficinaService} from '../../services/guardar-oficina.service'
-
+import {ReglasService} from '../../services/reglas.service'
 
 import {OficinaService} from '../../services/oficina.service'
 import {ServiciosService} from '../../services/servicios.service'
-import {global} from '../../services/global'
+import {environment} from '../../../environments/environment'
 import {LoginService} from '../../services/login.service'
 import {ReservasService} from '../../services/reservas.service'
+import {OfficeReglasPage} from '../office-reglas/office-reglas.page'
 
 import {oficinaGuardada} from '../../models/oficinaGuardada'
 import { Storage } from '@ionic/storage';
@@ -40,14 +41,16 @@ export class OfficePage implements OnInit, AfterViewInit {
   public identity;
   public token;
   public oficinas_guardadas = [];
+  public reglas;
 
   public statusReserva;
-
+  public condiciones:false
   public verificar = {
     id_usuario: "",
     id_oficina: 0
   }
   public numeroServicios: number;
+  public numeroReglas:number
 
   public existe: boolean = true;
 
@@ -64,10 +67,11 @@ export class OfficePage implements OnInit, AfterViewInit {
     private _guardarOficina: GuardarOficinaService,
     public alertController: AlertController, 
     private _reservas: ReservasService,
-    private storage: Storage
+    private storage: Storage,
+    private _reglas: ReglasService
   
   ) { 
-    this.url = global.url;
+    this.url = environment.apiUrl;
     this.guardada = new oficinaGuardada(1, 1, 1);
     
     this.verificarReservaDias();
@@ -75,7 +79,7 @@ export class OfficePage implements OnInit, AfterViewInit {
 
  async ngOnInit() {
     let id = this._route.snapshot.paramMap.get('id');
-   
+    this.obtenerReglas();
     this.obtenerOficina();
     this.obtenerServicios();
     this.identity = await this._login.getIdentity();
@@ -201,50 +205,56 @@ export class OfficePage implements OnInit, AfterViewInit {
 async verificarGuardado()
   {
     this.token = await this._login.getToken();
-    let id = this._route.snapshot.paramMap.get('id');
-    this.verificar.id_oficina = Number(id);
-    this.verificar.id_usuario = this.identity.sub;
-    console.log(this.verificar);
+    if(this.token != null){
+      
+      let id = this._route.snapshot.paramMap.get('id');
+      this.verificar.id_oficina = Number(id);
+      this.verificar.id_usuario = this.identity.sub;
+      console.log(this.verificar);
 
-    await this._guardarOficina.verificarOficina(this.verificar).subscribe(
-      res => {
-        console.log(res.existe);
-        if(res.existe == 1)
-        {
-          this.existe = false;
-        }else{
-          this.existe = true;
-        }
-      }, error => {
-        console.log(error);
-      }
-    )
-    /*
-   await this._guardarOficina.oficinasGuardadasUsuario(this.token).subscribe(
-      response =>
-      {
-        if(response.status == "success")
-        {
-          console.log(response.guardadas);
-         for(let i=0; i<response.guardadas.length; i++)
+      await this._guardarOficina.verificarOficina(this.verificar).subscribe(
+        res => {
+          console.log(res.existe);
+          if(res.existe == 1)
           {
-            console.log(response.guardadas[i].office_id);
-            if(response.guardadas[i].office_id == id)
-            {
-              this.existe = false;
-              break
-            }else
-            {
-              this.existe = true;
-            }
+            this.existe = false;
+            console.log(this.existe)
+          }else{
+            this.existe = true;
+            console.log(this.existe)
+          }
+        }, error => {
+          console.log(error);
+        }
+    )
+    }
+    
+  }
+
+ async login()
+  {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'No has iniciado sesion',
+      message: 'Para tener oficinas guardadas necesitas iniciar sesion con tu cuenta',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Login',
+          handler: () => {
+            this.navCtrl.navigateRoot('/login', {animated: true});
           }
         }
-      }, error =>
-      {
-        console.log(error);
-      }
-    )
-    */
+      ]
+    });
+
+    await alert.present();
   }
 
  async EliminarOficinaGuardada()
@@ -308,6 +318,43 @@ async verificarGuardado()
           this.status == "success"
           this.numeroServicios = this.servicios.length;
           console.log(this.servicios);
+        }
+        else{
+          this.status == "error"
+        }
+      },error =>
+      {
+        console.log(error);
+      }
+    )
+  }
+
+  async MostrarReglas()
+  {
+    let id = this._route.snapshot.paramMap.get('id');
+    const modal = await this.modalCtrl.create({
+      component: OfficeReglasPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        id: id
+      }
+    });
+    return await modal.present();
+  }
+
+  obtenerReglas()
+  {
+    let id = this._route.snapshot.paramMap.get('id');
+
+    this._reglas.getReglasOficina(id).subscribe(
+      response =>{
+        if(response.status == "success")
+        {
+          this.reglas = response.reglas;
+          this.numeroReglas = this.reglas.length;
+          this.status == "success"
+          console.log(this.reglas);
+
         }
         else{
           this.status == "error"

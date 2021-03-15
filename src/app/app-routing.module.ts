@@ -52,7 +52,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
   },
   {
-    path: 'rules-office/:id',
+    path: 'rules-office',
     loadChildren: () => import('./pages/rules-office/rules-office.module').then( m => m.RulesOfficePageModule)
   },
   {
@@ -86,6 +86,18 @@ const routes: Routes = [
   {
     path: 'buscar-cupon',
     loadChildren: () => import('./pages/buscar-cupon/buscar-cupon.module').then( m => m.BuscarCuponPageModule)
+  },
+  {
+    path: 'office-reglas',
+    loadChildren: () => import('./pages/office-reglas/office-reglas.module').then( m => m.OfficeReglasPageModule)
+  },
+  {
+    path: 'mostrar-mensaje/:id',
+    loadChildren: () => import('./pages/mostrar-mensaje/mostrar-mensaje.module').then( m => m.MostrarMensajePageModule)
+  },
+  {
+    path: 'mostrar-mensaje-arrendador/:id',
+    loadChildren: () => import('./pages/mostrar-mensaje-arrendador/mostrar-mensaje-arrendador.module').then( m => m.MostrarMensajeArrendadorPageModule)
   },
  
 ];

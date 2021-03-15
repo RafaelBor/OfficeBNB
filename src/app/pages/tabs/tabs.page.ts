@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from '../../services/login.service'
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor() { }
+  public token:string;
+  constructor(
+    private _login: LoginService,
+    private navCtrl: NavController
+  ) {
 
-  ngOnInit() {
+   }
+
+ async ngOnInit() {
+    this.token = await this._login.getToken();
+  }
+
+  login()
+  {
+    this.navCtrl.navigateRoot('/login', {animated: true});
   }
 
 }

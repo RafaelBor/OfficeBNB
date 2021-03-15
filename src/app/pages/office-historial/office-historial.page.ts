@@ -3,7 +3,7 @@ import {LoginService} from '../../services/login.service'
 import {ReservasService} from '../../services/reservas.service'
 import { ModalController } from '@ionic/angular';
 import {StatusReservaPage} from '../status-reserva/status-reserva.page'
-import {global} from '../../services/global'
+import {environment} from '../../../environments/environment'
 
 
 
@@ -25,7 +25,7 @@ export class OfficeHistorialPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.obtenerReservas();
-    this.url = global.url
+    this.url = environment.apiUrl
    }
 
   ngOnInit() {
