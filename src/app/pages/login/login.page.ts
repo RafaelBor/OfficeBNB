@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   public token;
   public identity;
   public registrar:string;
-  public condiciones:false
+  public condiciones = false
 
   constructor(
     private navCtrl: NavController,
@@ -83,6 +83,7 @@ export class LoginPage implements OnInit {
   }
 
   registro(fRegistro: NgForm){
+  
     this._login.register(this.usuario).subscribe(
       response =>{
         if(response.status == "success")

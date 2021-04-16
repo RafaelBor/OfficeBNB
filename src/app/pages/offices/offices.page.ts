@@ -112,6 +112,7 @@ export class OfficesPage implements OnInit, AfterViewInit {
             {
               var marker = new mapboxgl.Marker()
               .setLngLat([this.oficinas[i].long_ubicacion, this.oficinas[i].lat_ubicacion])
+       
               .addTo(map);
             }
             }
